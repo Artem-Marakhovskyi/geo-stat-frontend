@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+//var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
@@ -33,7 +33,7 @@ module.exports = {
             /angular(\\|\/)core/,
             path.resolve(__dirname, 'src'),
             {}
-        ),
-        new UglifyJSPlugin()
+        )
+        //new UglifyJSPlugin()
     ]
 }
