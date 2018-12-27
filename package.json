@@ -1,8 +1,8 @@
 {
-    "name": "helloapp",
+    "name": "GeoStat",
     "version": "1.0.0",
-    "description": "First Angular 7 Project",
-    "author": "Alex",
+    "description": "GeoStat web application",
+    "author": "GeoStat team",
     "scripts": {
         "dev": "webpack-dev-server --hot --open",
         "build": "webpack"
