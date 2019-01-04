@@ -3,21 +3,21 @@
     <fieldset>
       <div class="pure-control-group">
         <label for="email">Email Address</label>
-        <input id="email" type="email" placeholder="Email Address">
+        <input id="email" type="email" name="email" [(ngModel)]="user.email" placeholder="Email Address">
       </div>
 
       <div class="pure-control-group">
         <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Password">
+        <input id="password" type="password" name="password" [(ngModel)]="user.password" placeholder="Password">
       </div>
 
       <div class="pure-control-group">
         <label for="password">Repeat password</label>
-        <input id="passwordRepeat" type="password" placeholder="Repeat password">
+        <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat" placeholder="Repeat password">
       </div>
 
       <div class="pure-controls">
-        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+        <button type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Register</button>
       </div>
     </fieldset>
   </form>
