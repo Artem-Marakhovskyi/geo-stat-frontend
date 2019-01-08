@@ -3,6 +3,7 @@ import { LoggerService } from 'src/common/services/logger.service';
 import { HttpService } from 'src/common/services/http.service'
 import { User } from './models/user';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +14,7 @@ export class AppComponent {
   title = 'geo-stat';
 
   constructor(private loggerService: LoggerService, private httpService: HttpService) {
-    this.loggerService.log("App component created");
+    this.loggerService.debug('Your log message goes here');
   }
 
   user: User = new User();
@@ -26,7 +27,7 @@ export class AppComponent {
       this.httpService.postData(user)
         .subscribe(
           (data: User) => { this.receivedUser = data; },
-          error => this.loggerService.log(error)
+          error => this.loggerService.error (error)
         );
     }
   }

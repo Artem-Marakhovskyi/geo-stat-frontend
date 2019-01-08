@@ -10,8 +10,8 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   postData(user: User) {
-
     const body = { email: user.email, password: user.password };
+    
     return this.http.post("", body);
   }
 }
