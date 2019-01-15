@@ -9,5 +9,4 @@ export class AppComponent {
   title = 'geo-stat';
 
   constructor() { }
-
 }
