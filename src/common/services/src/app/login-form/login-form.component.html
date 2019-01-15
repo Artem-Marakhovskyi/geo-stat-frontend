@@ -1,0 +1,21 @@
+<div class="centered-block">
+    <form class="pure-form pure-form-aligned">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" name="email" [(ngModel)]="user.email" placeholder="Email Address">
+        </div>
+  
+        <div class="pure-control-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" [(ngModel)]="user.password" placeholder="Password">
+        </div>
+  
+        <div class="form-control">
+          <button type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Log in</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  
+  <router-outlet></router-outlet>
