@@ -1,26 +1,15 @@
-<div class="centered-block">
-  <form class="pure-form pure-form-aligned">
-    <fieldset>
-      <div class="pure-control-group">
-        <label for="email">Email Address</label>
-        <input id="email" type="email" name="email" [(ngModel)]="user.email" placeholder="Email Address">
-      </div>
-
-      <div class="pure-control-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" name="password" [(ngModel)]="user.password" placeholder="Password">
-      </div>
-
-      <div class="pure-control-group">
-        <label for="password">Repeat password</label>
-        <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat" placeholder="Repeat password">
-      </div>
-
-      <div class="pure-controls">
-        <button type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Register</button>
-      </div>
-    </fieldset>
-  </form>
+<div class="menu home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+    <a class="pure-menu-heading" routerLink="">GeoStat</a>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">About</a></li>
+        <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">Contact</a></li>
+    </ul>
+    <ul class="pure-menu-list right-bar">
+        <li class="pure-menu-item"><a routerLink="/login" class="pure-menu-link">Log In</a></li>
+        <li class="pure-menu-item"><a routerLink="/register" class="pure-menu-link">Sign Up</a></li>
+    </ul>
 </div>
+
+<div class="menu-image"></div>
 
 <router-outlet></router-outlet>

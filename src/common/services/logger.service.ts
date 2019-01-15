@@ -8,23 +8,19 @@ export class LoggerService {
 
   constructor(private logger: NGXLogger) { }
 
-  debug(logText: string){
+  debug(logText: string) {
     this.logger.debug(logText);
   }
-  
-  error(logText: string){
+  error(logText: string) {
     this.logger.error(logText);
   }
-  
-  fatal(logText: string){
+  fatal(logText: string) {
     this.logger.fatal(logText);
   }
-  
-  info(logText: string){
+  info(logText: string) {
     this.logger.info(logText);
   }
-  
-  trace(logText: string){
+  trace(logText: string) {
     this.logger.trace(logText);
   }
 }

@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f2f2f2;
+}
+
+.menu {
+    background-color: #cccccc;
+    color: white;
+}
+
+.right-bar {
+    float: right;
+}
+
+.centered-block {
+    text-align:center;
+    margin-top: 35vh;
+}
+
+.menu-image {
+    padding-top: 30px;
+}
+
+.form-control {
+    margin: 1.5em 0px 0 2em
+}

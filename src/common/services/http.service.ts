@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -11,7 +11,6 @@ export class HttpService {
 
   postData(user: User) {
     const body = { email: user.email, password: user.password };
-    
-    return this.http.post("", body);
+    return this.http.post('', body);
   }
 }
