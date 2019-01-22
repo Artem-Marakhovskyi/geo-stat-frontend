@@ -6,5 +6,5 @@ import { HttpService } from './http.service';
 })
 export class LocationService {
 
-  constructor(private http: HttpService) { }
+  public constructor(private http: HttpService) { }
 }

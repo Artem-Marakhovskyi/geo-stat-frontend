@@ -10,20 +10,20 @@ import { Observable } from 'rxjs/observable';
 })
 export class HttpService {
 
-  private getLocationsURL = 'http://geostat-app.azurewebsites.net/tables/Location';
-  private getGroupsURL = 'http://geostat-app.azurewebsites.net/tables/Group';
+  private readonly getLocationsURL = 'http://geostat-app.azurewebsites.net/tables/Location';
+  private readonly getGroupsURL = 'http://geostat-app.azurewebsites.net/tables/Group';
 
-  constructor(private http: HttpClient) { }
+  public constructor(private http: HttpClient) { }
 
-  postUser(user: User) {
+  public postUser(user: User) {
     return this.http.post('', user);
   }
 
-  getLocations(): Observable<Location[]> {
+  public getLocations(): Observable<Location[]> {
     return this.http.get<Location[]>(this.getLocationsURL);
   }
 
-  getGroups(): Observable<Group[]> {
+  public getGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(this.getGroupsURL);
   }
 }

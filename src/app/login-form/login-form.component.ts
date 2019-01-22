@@ -11,10 +11,10 @@ import { User } from '../models/user';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private loggerService: LoggerService, private httpService: HttpService) { }
+  public constructor(private loggerService: LoggerService, private httpService: HttpService) { }
 
-  user: User = new User();
-  receivedUser: User;
+  private user: User = new User();
+  private receivedUser: User;
 
   submit(user: User) {
 

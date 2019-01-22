@@ -12,7 +12,7 @@ import { LoggerService } from 'src/common/services/logger.service';
 export class LocationsComponent implements OnInit {
   private myLocations: Location[];
 
-  constructor(
+  public constructor(
     private loggerService: LoggerService,
     private httpService: HttpService) { }
 

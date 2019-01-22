@@ -11,7 +11,7 @@ import { Group } from '../models/group';
 export class GroupsComponent implements OnInit {
   private myGroups: Group[];
 
-  constructor(private loggerService: LoggerService, private httpService: HttpService) { }
+  public constructor(private loggerService: LoggerService, private httpService: HttpService) { }
 
   ngOnInit() {
     this.httpService.getGroups().subscribe(
