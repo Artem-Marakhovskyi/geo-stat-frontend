@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Locations:</h2>
+</div>
+<div *ngFor="let location of myLocations">
+  <div class="location-item">
+    <p><b>ID:</b> {{location.id}}</p>
+    <p><b>User ID:</b> {{location.userId}}</p>
+    <p><b>Latitude:</b> {{location.latitude}}</p>
+    <p><b>Longitude:</b> {{location.longitude}}</p>
+    <p><b>Date:</b> {{location.dateTime | date:'medium' }}</p>
+  </div>
+</div>

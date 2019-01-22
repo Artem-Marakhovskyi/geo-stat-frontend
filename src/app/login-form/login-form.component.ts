@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
 
   submit(user: User) {
 
-    this.httpService.postData(user)
+    this.httpService.postUser(user)
       .subscribe(
         (data: User) => { this.receivedUser = data; },
         error => this.loggerService.error(error)

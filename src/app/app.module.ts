@@ -8,12 +8,16 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LocationsComponent } from './locations/locations.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LocationsComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
