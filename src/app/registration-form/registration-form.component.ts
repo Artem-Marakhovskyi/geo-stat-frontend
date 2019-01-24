@@ -16,9 +16,9 @@ export class RegistrationFormComponent implements OnInit {
     this.loggerService.debug('Your log message goes here');
   }
 
-  user: User = new User();
+  private user: User = new User();
 
-  submit(user: User) {
+  public submit(user: User) {
 
     if (user.password === user.passwordRepeat) {
       this.httpService.postUser(user)

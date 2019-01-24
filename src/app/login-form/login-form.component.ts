@@ -11,12 +11,14 @@ import { User } from '../models/user';
 })
 export class LoginFormComponent implements OnInit {
 
-  public constructor(private loggerService: LoggerService, private httpService: HttpService) { }
-
   private user: User = new User();
   private receivedUser: User;
 
-  submit(user: User) {
+  public constructor(
+    private loggerService: LoggerService,
+    private httpService: HttpService) { }
+
+  public submit(user: User) {
 
     this.httpService.postUser(user)
       .subscribe(
