@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from 'src/common/services/logger.service';
-import { HttpService } from 'src/common/services/http.service';
 import { GroupUser } from '../models/groupUser';
 import { Group } from '../models/group';
 import { GeoStatUser } from '../models/geoStatUser';
 import { GroupUsers } from '../models/groupUsers';
-import { Observable, forkJoin, of } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { GroupService } from 'src/common/services/group.service';
+import { UserService } from 'src/common/services/user.service';
 
 @Component({
   selector: 'app-group-users',
@@ -19,14 +20,15 @@ export class GroupUsersComponent implements OnInit {
   private groupUsers: GroupUser[];
 
   constructor(
-    private loggerService: LoggerService,
-    private httpService: HttpService) { }
+    private groupService: GroupService,
+    private userService: UserService,
+    private loggerService: LoggerService) { }
 
   ngOnInit() {
     forkJoin(
-      this.httpService.getGroups(),
-      this.httpService.getUsers(),
-      this.httpService.getGroupUsers()
+      this.groupService.getGroups(),
+      this.userService.getUsers(),
+      this.userService.getGroupUsers()
     ).subscribe(([groupsData, usersData, groupUsersData]) => {
       this.groups = groupsData;
       this.users = usersData;

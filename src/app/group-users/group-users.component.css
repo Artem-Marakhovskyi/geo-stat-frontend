@@ -2,10 +2,11 @@
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;
+    margin-bottom: 30px;
     padding: 10px;
-    color: #99ff66;
-    background-color: #eeffe6;
-    border-color: #bbff99;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
     border: 1px solid;
     border-radius: .5rem;
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '../models/location';
-import { Group } from '../models/group';
-import { HttpService } from 'src/common/services/http.service';
 import { LoggerService } from 'src/common/services/logger.service';
+import { LocationService } from 'src/common/services/location.service';
 
 @Component({
   selector: 'app-locations',
@@ -14,10 +13,10 @@ export class LocationsComponent implements OnInit {
 
   public constructor(
     private loggerService: LoggerService,
-    private httpService: HttpService) { }
+    private locationService: LocationService) { }
 
   ngOnInit() {
-    this.httpService.getLocations().subscribe(
+    this.locationService.getLocations().subscribe(
       (result: Location[]) => {
         this.myLocations = result;
       });

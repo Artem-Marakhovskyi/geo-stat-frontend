@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from 'src/common/services/logger.service';
-import { HttpService } from 'src/common/services/http.service';
 import { Group } from '../models/group';
+import { GroupService } from 'src/common/services/group.service';
 
 @Component({
   selector: 'app-groups',
@@ -13,10 +13,10 @@ export class GroupsComponent implements OnInit {
 
   public constructor(
     private loggerService: LoggerService,
-    private httpService: HttpService) { }
+    private groupService: GroupService) { }
 
   ngOnInit() {
-    this.httpService.getGroups().subscribe(
+    this.groupService.getGroups().subscribe(
       (result: Group[]) => {
         this.myGroups = result;
       });
