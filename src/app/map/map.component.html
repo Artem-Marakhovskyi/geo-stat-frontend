@@ -1,3 +1,7 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude" [zoom]="this.mapConfiguration.zoom">
+    <agm-marker  *ngFor="let location of userLocations" [latitude]="location.latitude" [longitude]="location.longitude"></agm-marker>
+  <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <agm-marker [latitude]="50.005369" [longitude]="36.229154"></agm-marker> -->
+  <!-- <agm-marker [latitude]="50.005699" [longitude]="36.240228"></agm-marker>
+  <agm-marker [latitude]="49.995217" [longitude]="36.210270"></agm-marker> -->
 </agm-map>
