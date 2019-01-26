@@ -31,7 +31,7 @@ import { MapComponent } from './map/map.component';
     LoggerModule.forRoot({ serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAWXGhYlOQdFls1kiP9AXm7ELPek32KR6o'
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
