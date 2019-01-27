@@ -1,3 +1,13 @@
 agm-map {
     height: 95vh;
 }
+
+.map-definiton {
+    float: left;
+    /* height: 85vh;  */
+    width: 20vw;
+    padding: 15px 30px;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(50,50,50,.4);
+}
