@@ -12,8 +12,8 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  private userLocations: Location[];
-  private userId = 'f46b7a360f634909989eac5e3a0bdbe3';
+  private usersLocations = new Array<Location[]>(0);
+  private index = 0;
 
   constructor(
     private locationService: LocationService,
@@ -21,24 +21,20 @@ export class MapComponent implements OnInit {
     private mapConfiguration: MapConfiguration) { }
 
   ngOnInit() {
-    // this.locationService.getLocations()
-    //   .subscribe((result: Location[]) => {
-    //     this.userLocations = result.filter(l => l.userId === this.userId);
-    //   });
+    this.mapConfiguration.shuffleColors();
 
-    let groupUsers: GroupUser[];
-    let locations: Location[];
-    let groupId = 'ff3a9e6d58f7474ca11451ecb32a93c5';
-
-    forkJoin(
-      this.userService.getGroupUsers(),
-      this.locationService.getLocations()
-    ).subscribe(([groupUsersData, locationsData]) => {
-      groupUsers = groupUsersData.filter(gu => gu.groupId === groupId);
-      locations = locationsData.filter(ld => groupUsers.some(gu => gu.userId === ld.userId));
-      console.log(locations);
-      this.userLocations = locations;
-    });
+    this.userService.getUsersForGroup('ff3a9e6d58f7474ca11451ecb32a93c5')
+      .toPromise()
+      .then(users => {
+        users.forEach(element => {
+          this.locationService.getLocationsForUser(element.userId)
+            .toPromise()
+            .then(locations => {
+              this.usersLocations.push(locations);
+            })
+        });
+      });
+    console.log(this.usersLocations);
   }
 
 }

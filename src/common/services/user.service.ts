@@ -22,4 +22,8 @@ export class UserService {
     return this.http.get<GroupUser[]>(UrlContaner.getGroupUsersURL);
   }
 
+  public getUsersForGroup(groupId: String): Observable<GroupUser[]> {
+    return this.http.get<GroupUser[]>(UrlContaner.getUsersForGroupURL(groupId));
+  }
+
 }

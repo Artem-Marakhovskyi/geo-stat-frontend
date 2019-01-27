@@ -20,21 +20,8 @@ export class LocationService {
     return this.http.get<Location[]>(UrlContaner.getLocationsURL);
   }
 
-  // public getLocationsForGroup(): Location[] {
-  //   let groupUsers: GroupUser[];
-  //   let locations: Location[];
-  //   let groupId = 'ff3a9e6d58f7474ca11451ecb32a93c5';
-
-  //   forkJoin(
-  //     this.http.get<GroupUser[]>(UrlContaner.getGroupUsersURL),
-  //     this.http.get<Location[]>(UrlContaner.getLocationsURL)
-  //   ).subscribe(([groupUsersData, locationsData]) => {
-  //     groupUsers = groupUsersData.filter(gu => gu.groupId === groupId);
-  //     locations = locationsData.filter(ld => groupUsers.some(gu => gu.userId === ld.userId));
-  //     //console.log(locations);
-  //   });
-
-  //   return locations;
-  // }
+  public getLocationsForUser(userId: String): Observable<Location[]> {
+    return this.http.get<Location[]>(UrlContaner.getLocationsForUserURL(userId));
+  }
 
 }
