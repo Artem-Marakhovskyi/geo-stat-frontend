@@ -1,0 +1,19 @@
+<div>
+  <div class="map-definiton">
+    <!-- <h1>{{groupName}}</h1> -->
+    <h1>First group</h1>
+    <ul class="user" *ngFor="let user of users; let i = index">
+      <li>{{user.email}} <span> <img src="{{'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[i]}}"></span></li>
+    </ul>
+  </div>
+  <agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude"
+    [zoom]="this.mapConfiguration.zoom">
+    <agm-marker *ngFor="let locations of usersLocations; let i = index">
+      {{index+1}}
+      <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude"
+        [iconUrl]="{
+        url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[i]
+      }"></agm-marker>
+    </agm-marker>
+  </agm-map>
+</div>

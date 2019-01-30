@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Groups users:</h2>
+</div>
+<div *ngFor="let gu of groupsWithUsers">
+  <div class="location-item">
+    <p><b>ID:</b> {{gu.id}}</p>
+    <p><b>Label:</b> {{gu.label}}</p>
+    <p><b>Creator ID:</b> {{gu.creatorId}}</p>
+    <div *ngFor="let u of gu.users">
+      <div class="user-item">
+        <p><b>ID:</b> {{u.id}}</p>
+        <p><b>Email:</b> {{u.email}}</p>
+      </div>
+    </div>
+  </div>
+</div>

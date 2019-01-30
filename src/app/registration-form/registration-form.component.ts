@@ -3,6 +3,7 @@ import { LoggerService } from 'src/common/services/logger.service';
 import { HttpService } from 'src/common/services/http.service';
 import { User } from '../models/user';
 
+
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -15,21 +16,19 @@ export class RegistrationFormComponent implements OnInit {
     this.loggerService.debug('Your log message goes here');
   }
 
-  user: User = new User();
-  receivedUser: User;
+  private user: User = new User();
 
-  submit(user: User) {
+  public submit(user: User) {
 
-    if (user.password === user.password) {
-      this.httpService.postData(user)
-        .subscribe(
-          (data: User) => { this.receivedUser = data; },
-          error => this.loggerService.error(error)
-        );
-    }
+    // if (user.password === user.passwordRepeat) {
+    //   this.httpService.postUser(user)
+    //     .subscribe(
+    //       response => { },
+    //       error => this.loggerService.error(error)
+    //     );
+    // }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

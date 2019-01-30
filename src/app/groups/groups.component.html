@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Groups:</h2>
+</div>
+<div *ngFor="let group of myGroups">
+  <div class="location-item">
+    <p><b>ID:</b> {{group.id}}</p>
+    <p><b>Label:</b> {{group.label}}</p>
+    <p><b>Creator ID:</b> {{group.creatorId}}</p>
+  </div>
+</div>
