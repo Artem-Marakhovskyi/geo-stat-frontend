@@ -26,4 +26,8 @@ export class UserService {
     return this.http.get<GroupUser[]>(UrlContaner.getUsersForGroupURL(groupId));
   }
 
+  public getUserById(id: String) {
+    return this.http.get<GeoStatUser>(UrlContaner.getUserByIdURL(id));
+  }
+
 }

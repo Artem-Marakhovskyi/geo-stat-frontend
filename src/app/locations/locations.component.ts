@@ -11,7 +11,7 @@ import { LocationService } from 'src/common/services/location.service';
 export class LocationsComponent implements OnInit {
   private myLocations: Location[];
 
-  public constructor(
+  constructor(
     private loggerService: LoggerService,
     private locationService: LocationService) { }
 

@@ -14,17 +14,17 @@ export class LoginFormComponent implements OnInit {
   private user: User = new User();
   private receivedUser: User;
 
-  public constructor(
+  constructor(
     private loggerService: LoggerService,
     private httpService: HttpService) { }
 
   public submit(user: User) {
 
-    this.httpService.postUser(user)
-      .subscribe(
-        (data: User) => { this.receivedUser = data; },
-        error => this.loggerService.error(error)
-      );
+    // this.httpService.postUser(user)
+    //   .subscribe(
+    //     (data: User) => { this.receivedUser = data; },
+    //     error => this.loggerService.error(error)
+    //   );
 
   }
 

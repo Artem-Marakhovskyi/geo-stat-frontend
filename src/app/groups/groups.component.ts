@@ -11,7 +11,7 @@ import { GroupService } from 'src/common/services/group.service';
 export class GroupsComponent implements OnInit {
   private myGroups: Group[];
 
-  public constructor(
+  constructor(
     private loggerService: LoggerService,
     private groupService: GroupService) { }
 

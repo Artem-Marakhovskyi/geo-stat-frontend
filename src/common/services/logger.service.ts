@@ -6,7 +6,7 @@ import { NGXLogger } from 'ngx-logger';
 })
 export class LoggerService {
 
-  public constructor(private logger: NGXLogger) { }
+  constructor(private logger: NGXLogger) { }
 
   public debug(logText: string) {
     this.logger.debug(logText);

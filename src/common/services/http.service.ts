@@ -13,14 +13,10 @@ import { UrlContaner } from '../url.contaner';
 })
 export class HttpService {
 
-  public constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   public get<T>(url: String): Observable<T> {
     return this.http.get<T>(url.toString());
-  }
-
-  public postUser(user: User) {
-    return this.http.post('', user);
   }
 
 }

@@ -4,6 +4,7 @@ import { Location } from '../models/location';
 import { MapConfiguration } from './map.configuration';
 import { UserService } from 'src/common/services/user.service';
 import { GroupService } from 'src/common/services/group.service';
+import { GeoStatUser } from '../models/geoStatUser';
 
 @Component({
   selector: 'app-map',
@@ -12,6 +13,7 @@ import { GroupService } from 'src/common/services/group.service';
 })
 export class MapComponent implements OnInit {
   private usersLocations = new Array<Location[]>(0);
+  private users: GeoStatUser[];
   private index = 0;
   private listIndex = 0;
   private groupName: String;
@@ -23,12 +25,13 @@ export class MapComponent implements OnInit {
     private mapConfiguration: MapConfiguration) { }
 
   ngOnInit() {
+    // this.userService.getUserById('')
     this.mapConfiguration.shuffleColors();
 
     this.groupService.getGroupById('ff3a9e6d58f7474ca11451ecb32a93c5')
       .subscribe(group => {
         this.groupName = group[0].label;
-      })
+      });
 
     this.userService.getUsersForGroup('ff3a9e6d58f7474ca11451ecb32a93c5')
       .toPromise()
@@ -38,7 +41,7 @@ export class MapComponent implements OnInit {
             .toPromise()
             .then(locations => {
               this.usersLocations.push(locations);
-            })
+            });
         });
       });
   }

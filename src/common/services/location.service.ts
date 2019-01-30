@@ -12,7 +12,7 @@ import { GroupUser } from 'src/app/models/groupUser';
 })
 export class LocationService {
 
-  public constructor(
+  constructor(
     private http: HttpService,
     private logger: LoggerService) { }
 

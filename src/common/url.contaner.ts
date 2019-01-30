@@ -14,6 +14,10 @@ export class UrlContaner {
         return UrlContaner.getGroupUsersURL + '?$filter=(GroupId%20eq%20%27' + groupId + '%27)';
     }
 
+    public static getUserByIdURL(userId: String) {
+        return UrlContaner.getUsersURL + '?$filter=(Id%20eq%20%27' + userId + '%27)';
+    }
+
     public static getGroupByIdURL(groupId: String) {
         return UrlContaner.getGroupsURL + '?$filter=(Id%20eq%20%27' + groupId + '%27)';
     }

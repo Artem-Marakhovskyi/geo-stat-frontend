@@ -20,13 +20,13 @@ export class RegistrationFormComponent implements OnInit {
 
   public submit(user: User) {
 
-    if (user.password === user.passwordRepeat) {
-      this.httpService.postUser(user)
-        .subscribe(
-          response => { },
-          error => this.loggerService.error(error)
-        );
-    }
+    // if (user.password === user.passwordRepeat) {
+    //   this.httpService.postUser(user)
+    //     .subscribe(
+    //       response => { },
+    //       error => this.loggerService.error(error)
+    //     );
+    // }
   }
 
   ngOnInit() { }

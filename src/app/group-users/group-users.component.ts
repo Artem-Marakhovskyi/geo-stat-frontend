@@ -35,10 +35,13 @@ export class GroupUsersComponent implements OnInit {
       this.groupUsers = groupUsersData;
 
       this.groups.forEach(element => {
-        const isNotEmptyGroup = this.groupUsers.some(gu => gu.groupId === element.id);
+        const isNotEmptyGroup = this.groupUsers
+          .some(gu => gu.groupId === element.id);
 
         if (isNotEmptyGroup) {
-          const currentGroupUsers = this.users.filter(u => this.groupUsers.some(gu => u.id === gu.userId && gu.groupId === element.id));
+          const currentGroupUsers = this.users
+            .filter(u => this.groupUsers
+              .some(gu => u.id === gu.userId && gu.groupId === element.id));
 
           this.groupsWithUsers.push(new GroupUsers(
             element.id,
