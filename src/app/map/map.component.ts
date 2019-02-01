@@ -15,7 +15,6 @@ export class MapComponent implements OnInit {
   private usersLocations = new Array<Location[]>(0);
   private users: GeoStatUser[];
   private index = 0;
-  private listIndex = 0;
   private groupName: String;
 
   constructor(
@@ -27,7 +26,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     // this.userService.getUserById('')
     this.mapConfiguration.shuffleColors();
-
+  
     this.groupService.getGroupById('ff3a9e6d58f7474ca11451ecb32a93c5')
       .subscribe(group => {
         this.groupName = group[0].label;

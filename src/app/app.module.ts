@@ -12,6 +12,7 @@ import { LocationsComponent } from './locations/locations.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupUsersComponent } from './group-users/group-users.component';
 import { MapComponent } from './map/map.component';
+import { GroupMapComponent } from './group-map/group-map.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MapComponent } from './map/map.component';
     LocationsComponent,
     GroupsComponent,
     GroupUsersComponent,
-    MapComponent
+    MapComponent,
+    GroupMapComponent
   ],
   imports: [
     BrowserModule,

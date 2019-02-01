@@ -7,16 +7,45 @@ import { LocationsComponent } from './locations/locations.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupUsersComponent } from './group-users/group-users.component';
 import { MapComponent } from './map/map.component';
+import { GroupMapComponent } from './group-map/group-map.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'register', component: RegistrationFormComponent },
-  { path: 'login', component: LoginFormComponent },
-  { path: 'locations', component: LocationsComponent },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'groupsUsers', component: GroupUsersComponent },
-  { path: 'map', component: MapComponent },
-  { path: '**', redirectTo: '/' }
+  {
+    path: '',
+    component: AppComponent
+  },
+  {
+    path: 'register',
+    component: RegistrationFormComponent
+  },
+  {
+    path: 'login',
+    component: LoginFormComponent
+  },
+  {
+    path: 'locations',
+    component: LocationsComponent
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent
+  },
+  {
+    path: 'groupsUsers',
+    component: GroupUsersComponent
+  },
+  {
+    path: 'map',
+    component: MapComponent
+  },
+  {
+    path: 'groupMap',
+    component: GroupMapComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  }
 ];
 
 @NgModule({
