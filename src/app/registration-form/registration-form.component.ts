@@ -11,6 +11,7 @@ import { User } from '../models/user';
   providers: [LoggerService, HttpService]
 })
 export class RegistrationFormComponent implements OnInit {
+  private passwordError;
 
   constructor(private loggerService: LoggerService, private httpService: HttpService) {
     this.loggerService.debug('Your log message goes here');
@@ -20,13 +21,18 @@ export class RegistrationFormComponent implements OnInit {
 
   public submit(user: User) {
 
-    // if (user.password === user.passwordRepeat) {
-    //   this.httpService.postUser(user)
-    //     .subscribe(
-    //       response => { },
-    //       error => this.loggerService.error(error)
-    //     );
-    // }
+    if (user.password === user.passwordRepeat) {
+      // this.httpService.postUser(user)
+      //   .subscribe(
+      //     response => { },
+      //     error => this.loggerService.error(error)
+      //   );
+    }
+    else {
+      alert('Passwords are not equal!');
+      this.user.password = '';
+      this.user.passwordRepeat = '';
+    }
   }
 
   ngOnInit() { }

@@ -2,6 +2,11 @@ body {
   background-color: #e6e6e6;
 }
 
+.validtion-error {
+  color: red; 
+  margin-top:10px;
+}
+
 .menu {
   background-color: #cccccc;
   color: white;

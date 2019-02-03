@@ -5,22 +5,34 @@
         <label for="email">Email Address</label>
         <input id="email" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email Address"
           required>
+        <div [hidden]="email.valid || email.pristine" class="validtion-error">
+          Email is required
+        </div>
       </div>
 
       <div class="pure-control-group">
         <label for="password">Password</label>
         <input id="password" type="password" name="password" [(ngModel)]="user.password" #password="ngModel"
           placeholder="Password" required>
+        <div [hidden]="password.valid || password.pristine" class="validtion-error">
+          Password is required
+        </div>
       </div>
 
       <div class="pure-control-group">
         <label for="password">Repeat password</label>
         <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat"
           #passwordRepeat="ngModel" placeholder="Repeat password" required>
+        <!-- <div id="passwordsNotEqual"  name="passwordsNotEqual" [(ngModel)]="passwordsNotEqual" #passwordsNotEqualControl="ngModel">
+          
+        </div> -->
+        <div [hidden]="passwordRepeat.valid || passwordRepeat.pristine" class="validtion-error">
+          Password repeat is required
+        </div>
       </div>
 
       <div class="form-control">
-        <button [disabled]="email.pristine || password.pristine || passwordRepeat.pristine" type="submit" class="pure-button pure-button-primary"
+        <button [disabled]="(email.pristine || password.pristine || passwordRepeat.pristine) || email.invalid || password.invalid || passwordRepeat.invalid" type="submit" class="pure-button pure-button-primary"
           (click)="submit(user)">Register</button>
       </div>
     </fieldset>
