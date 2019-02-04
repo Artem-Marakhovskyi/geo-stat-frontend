@@ -4,36 +4,37 @@
       <div class="pure-control-group">
         <label for="email">Email Address</label>
         <input id="email" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email Address"
-          required>
+          required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
         <div [hidden]="email.valid || email.pristine" class="validtion-error">
-          Email is required
+          Email has invalid format
         </div>
       </div>
 
       <div class="pure-control-group">
         <label for="password">Password</label>
         <input id="password" type="password" name="password" [(ngModel)]="user.password" #password="ngModel"
-          placeholder="Password" required>
+          placeholder="Password" required pattern=".{6,}">
         <div [hidden]="password.valid || password.pristine" class="validtion-error">
-          Password is required
+          Password must contains at least 6 characters
         </div>
       </div>
 
       <div class="pure-control-group">
         <label for="password">Repeat password</label>
         <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat"
-          #passwordRepeat="ngModel" placeholder="Repeat password" required>
-        <!-- <div id="passwordsNotEqual"  name="passwordsNotEqual" [(ngModel)]="passwordsNotEqual" #passwordsNotEqualControl="ngModel">
-          
-        </div> -->
+          #passwordRepeat="ngModel" placeholder="Repeat password" required pattern=".{6,}">
         <div [hidden]="passwordRepeat.valid || passwordRepeat.pristine" class="validtion-error">
-          Password repeat is required
+          Password repeat must contains at least 6 characters
         </div>
       </div>
 
+      <!-- <div class="pure-control-group">
+        <label class="validation-message">All fields are required</label>
+      </div> -->
+
       <div class="form-control">
-        <button [disabled]="(email.pristine || password.pristine || passwordRepeat.pristine) || email.invalid || password.invalid || passwordRepeat.invalid" type="submit" class="pure-button pure-button-primary"
-          (click)="submit(user)">Register</button>
+        <button [disabled]="(email.pristine || password.pristine || passwordRepeat.pristine) || email.invalid || password.invalid || passwordRepeat.invalid"
+          type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Register</button>
       </div>
     </fieldset>
   </form>

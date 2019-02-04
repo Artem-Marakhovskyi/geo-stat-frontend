@@ -1,9 +1,8 @@
 <div class="menu home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
     <a class="pure-menu-heading" routerLink="">GeoStat</a>
-    <ul class="pure-menu-list">
+    <ul class="pure-menu-list" *ngIf="this.token != null">
         <!-- <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">About</a></li>
         <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">Contact</a></li> -->
-        <li class="pure-menu-item"><a routerLink="/locations" class="pure-menu-link">Locations</a></li>
         <li class="pure-menu-item"><a routerLink="/groups" class="pure-menu-link">Groups</a></li>
         <li class="pure-menu-item"><a routerLink="/groupsUsers" class="pure-menu-link">Groups users</a></li>
         <li class="pure-menu-item"><a routerLink="/map" class="pure-menu-link">Map</a></li>

@@ -9,8 +9,11 @@ import { LoggerService } from 'src/common/services/logger.service';
 })
 export class AppComponent implements OnInit {
   title = 'geo-stat';
+  private token;
 
   constructor(private loggerService: LoggerService, private httpService: HttpService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.token = localStorage.getItem('geostat-token');
+  }
 }
