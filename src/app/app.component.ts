@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/common/services/http.service';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { LoggerService } from 'src/common/services/logger.service';
+import { AccountService } from 'src/common/services/account.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'geo-stat';
-  private token;
+export class AppComponent implements OnInit, DoCheck {
+  private title = 'geo-stat';
+  public isAuthorized: boolean;
 
-  constructor(private loggerService: LoggerService, private httpService: HttpService) { }
+  constructor(
+    private logger: LoggerService,
+    private account: AccountService) { }
 
-  ngOnInit() { 
-    this.token = localStorage.getItem('geostat-token');
+  ngOnInit() {
+    this.isAuthorized = this.account.isAuthorized();
   }
+
+  ngDoCheck() {
+    this.isAuthorized = this.account.isAuthorized();
+  }
+
 }

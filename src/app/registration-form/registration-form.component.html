@@ -2,14 +2,13 @@
   <form class="pure-form pure-form-aligned">
     <fieldset>
       <div class="pure-control-group">
-        <label for="email">Email Address</label>
-        <input id="email" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email Address"
+        <label for="email">Email address</label>
+        <input id="email" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email address"
           required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
         <div [hidden]="email.valid || email.pristine" class="validtion-error">
           Email has invalid format
         </div>
       </div>
-
       <div class="pure-control-group">
         <label for="password">Password</label>
         <input id="password" type="password" name="password" [(ngModel)]="user.password" #password="ngModel"
@@ -18,7 +17,6 @@
           Password must contains at least 6 characters
         </div>
       </div>
-
       <div class="pure-control-group">
         <label for="password">Repeat password</label>
         <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat"
@@ -27,11 +25,9 @@
           Password repeat must contains at least 6 characters
         </div>
       </div>
-
-      <!-- <div class="pure-control-group">
-        <label class="validation-message">All fields are required</label>
+      <!-- <div class="pure-control-group" [hidden]="password.touched || passwordRepeat.touched">
+        <label class="validation-message">Passwords are not equal!</label>
       </div> -->
-
       <div class="form-control">
         <button [disabled]="(email.pristine || password.pristine || passwordRepeat.pristine) || email.invalid || password.invalid || passwordRepeat.invalid"
           type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Register</button>
@@ -39,5 +35,4 @@
     </fieldset>
   </form>
 </div>
-
 <router-outlet></router-outlet>

@@ -12,26 +12,23 @@ import { User } from '../models/user';
 })
 export class RegistrationFormComponent implements OnInit {
   private passwordError;
-
-  constructor(private loggerService: LoggerService, private httpService: HttpService) {
-    this.loggerService.debug('Your log message goes here');
-  }
-
   private user: User = new User();
 
-  public submit(user: User) {
+  constructor(
+    private loggerService: LoggerService,
+    private httpService: HttpService) { }
 
+  public submit(user: User) {
     if (user.password === user.passwordRepeat) {
       // this.httpService.postUser(user)
       //   .subscribe(
       //     response => { },
       //     error => this.loggerService.error(error)
       //   );
-    }
-    else {
-      alert('Passwords are not equal!');
+    } else {
       this.user.password = '';
       this.user.passwordRepeat = '';
+      alert('Passwords are not equal!');
     }
   }
 

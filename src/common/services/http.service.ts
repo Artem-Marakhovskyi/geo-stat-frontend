@@ -9,12 +9,12 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  public get<T>(url: String): Observable<T> {
-    return this.http.get<T>(url.toString());
+  public get<T>(url: string): Observable<T> {
+    return this.http.get<T>(url);
   }
 
-  public post(url: String, body: any) {
-    this.http.post(url.toString(), body);
+  public post(url: string, body: any) {
+    this.http.post(url, body);
   }
 
 }

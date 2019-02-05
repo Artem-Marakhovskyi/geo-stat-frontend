@@ -6,15 +6,15 @@ export class UrlContaner {
     public static readonly getGroupUsersURL = UrlContaner.commonURL + '/tables/GroupUser';
     public static readonly getUsersURL = UrlContaner.commonURL + '/tables/GeoStatUser';
 
-    public static getLocationsForUserURL(userId: String) {
+    public static getLocationsForUserURL(userId: string) {
         return UrlContaner.getLocationsURL + '?$filter=(UserId%20eq%20%27' + userId + '%27)';
     }
 
-    public static getUsersForGroupURL(groupId: String) {
+    public static getUsersForGroupURL(groupId: string) {
         return UrlContaner.getGroupUsersURL + '?$filter=(GroupId%20eq%20%27' + groupId + '%27)';
     }
 
-    public static getUserByIdURL(userId: String) {
+    public static getUserByIdURL(userId: string) {
         return UrlContaner.getUsersURL + '?$filter=(Id%20eq%20%27' + userId + '%27)';
     }
 

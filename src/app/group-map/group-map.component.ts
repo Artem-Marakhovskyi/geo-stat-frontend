@@ -34,7 +34,7 @@ export class GroupMapComponent implements OnInit {
     this.usersLocations.push([
       new Location(49.992408, 36.211883, new Date(), "2", "3"),
     ]);
-    
+
     this.usersLocations.push([
       new Location(49.998563, 36.224844, new Date(), "3", "4"),
     ]);

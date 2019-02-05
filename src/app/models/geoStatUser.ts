@@ -1,10 +1,10 @@
 export class GeoStatUser {
-    email: String;
-    id: String;
+    email: string;
+    id: string;
 
     constructor(
-        email: String,
-        id: String,
+        email: string,
+        id: string,
     ) {
         this.email = email;
         this.id = id;

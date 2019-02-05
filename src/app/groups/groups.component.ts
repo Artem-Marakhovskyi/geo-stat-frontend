@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from 'src/common/services/logger.service';
 import { Group } from '../models/group';
 import { GroupService } from 'src/common/services/group.service';
+import { AccountService } from 'src/common/services/account.service';
 
 @Component({
   selector: 'app-groups',
@@ -9,7 +10,7 @@ import { GroupService } from 'src/common/services/group.service';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-  private myGroups: Group[];
+  private userGroups: Group[];
 
   constructor(
     private loggerService: LoggerService,
@@ -18,7 +19,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
     this.groupService.getGroups().subscribe(
       (result: Group[]) => {
-        this.myGroups = result;
+        this.userGroups = result;
       });
   }
 

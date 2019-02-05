@@ -1,15 +1,15 @@
 import { GeoStatUser } from './geoStatUser';
 
 export class GroupUsers {
-    id: String;
-    label: String;
-    creatorId: String;
+    id: string;
+    label: string;
+    creatorId: string;
     users: GeoStatUser[];
 
     constructor(
-        id: String,
-        label: String,
-        creatorId: String,
+        id: string,
+        label: string,
+        creatorId: string,
         users: GeoStatUser[]
     ) {
         this.id = id;

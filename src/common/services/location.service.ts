@@ -20,7 +20,7 @@ export class LocationService {
     return this.http.get<Location[]>(UrlContaner.getLocationsURL);
   }
 
-  public getLocationsForUser(userId: String): Observable<Location[]> {
+  public getLocationsForUser(userId: string): Observable<Location[]> {
     return this.http.get<Location[]>(UrlContaner.getLocationsForUserURL(userId));
   }
 

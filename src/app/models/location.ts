@@ -1,16 +1,16 @@
 export class Location {
-    latitude: Number;
-    longitude: Number;
+    latitude: number;
+    longitude: number;
     dateTime: Date;
-    userId: String;
-    id: String;
+    userId: string;
+    id: string;
 
     constructor(
-        latitude: Number,
-        longitude: Number,
+        latitude: number,
+        longitude: number,
         dateTime: Date,
-        userId: String,
-        id: String
+        userId: string,
+        id: string
     ) {
         this.id = id;
         this.longitude = longitude;

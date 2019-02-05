@@ -9,7 +9,6 @@
           Email is required
         </div>
       </div>
-
       <div class="pure-control-group">
         <label for="password">Password</label>
         <input id="password" type="password" name="password" [(ngModel)]="user.password" #password="ngModel"
@@ -18,12 +17,10 @@
           Password is required
         </div>
       </div>
-
       <div class="form-control">
         <button [disabled]="password.invalid || password.pristine || email.invalid || email.pristine" type="submit" class="pure-button pure-button-primary" (click)="submit(user)">Log in</button>
       </div>
     </fieldset>
   </form>
 </div>
-
 <router-outlet></router-outlet>
