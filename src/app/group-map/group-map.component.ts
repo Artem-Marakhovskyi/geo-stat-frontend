@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { GeoStatUser } from '../models/geoStatUser';
 import { UserService } from 'src/common/services/user.service';
 import { GroupService } from 'src/common/services/group.service';
-import { MapConfiguration } from '../map/map.configuration';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
+import { MapType } from 'src/common/enums';
+import { AccountService } from 'src/common/services/account.service';
 
 @Component({
   selector: 'app-group-map',
@@ -14,17 +15,21 @@ import { Location } from '../models/location';
 export class GroupMapComponent implements OnInit {
   private usersLocations = new Array<Location[]>(0);
   private users: GeoStatUser[];
-  private index = 0;
   private groupName: String;
+  private type = MapType.Group;
 
   constructor(
     private locationService: LocationService,
     private userService: UserService,
     private groupService: GroupService,
-    private mapConfiguration: MapConfiguration) { }
+    private accountService: AccountService) { }
 
   ngOnInit() {
-    this.mapConfiguration.shuffleColors();
+    if (!this.accountService.isAuthorized()) {
+      this.accountService.redirectToLogin();
+    }
+
+    this.groupName = 'First group';
 
     this.usersLocations.push([
       new Location(49.995245, 36.233340, new Date(), "1", "1"),

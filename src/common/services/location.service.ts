@@ -4,8 +4,7 @@ import { Observable, forkJoin } from 'rxjs';
 import { UrlContaner } from '../url.contaner';
 import { LoggerService } from './logger.service';
 import { Location } from '../../app/models/location';
-import { Group } from 'src/app/models/group';
-import { GroupUser } from 'src/app/models/groupUser';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,9 @@ export class LocationService {
     private logger: LoggerService) { }
 
   public getLocations(): Observable<Location[]> {
-    return this.http.get<Location[]>(UrlContaner.getLocationsURL);
+    const httpHeaders = new HttpHeaders().set('GeoStatAuthToken', localStorage.getItem('geostat-token'));
+    
+    return this.http.get<Location[]>(UrlContaner.getLocationsURL, httpHeaders);
   }
 
   public getLocationsForUser(userId: string): Observable<Location[]> {

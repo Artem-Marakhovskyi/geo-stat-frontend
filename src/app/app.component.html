@@ -1,10 +1,9 @@
 <div class="menu home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
     <a class="pure-menu-heading" routerLink="">GeoStat</a>
     <ul class="pure-menu-list" *ngIf="this.isAuthorized === true">
-        <li class="pure-menu-item"><a routerLink="/groups" class="pure-menu-link">Groups</a></li>
         <li class="pure-menu-item"><a routerLink="/groupsUsers" class="pure-menu-link">Groups users</a></li>
-        <li class="pure-menu-item"><a routerLink="/map" class="pure-menu-link">Map</a></li>
-        <li class="pure-menu-item"><a routerLink="/groupMap" class="pure-menu-link">Group map</a></li>
+        <li class="pure-menu-item"><a routerLink="/userMap" class="pure-menu-link">User map</a></li>
+        <!-- <li class="pure-menu-item"><a routerLink="/groupMap" class="pure-menu-link">Group map</a></li> -->
     </ul>
     <ul class="pure-menu-list right-bar" *ngIf="this.isAuthorized === true">
         <li class="pure-menu-item"><a routerLink="/login" class="pure-menu-link" (click)="this.account.logOff()">Log Off</a></li>

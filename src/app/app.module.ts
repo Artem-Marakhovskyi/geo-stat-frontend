@@ -8,20 +8,22 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AgmCoreModule } from '@agm/core';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { GroupsComponent } from './groups/groups.component';
 import { GroupUsersComponent } from './group-users/group-users.component';
 import { MapComponent } from './map/map.component';
 import { GroupMapComponent } from './group-map/group-map.component';
+import { UserMapComponent } from './user-map/user-map.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationFormComponent,
     LoginFormComponent,
-    GroupsComponent,
     GroupUsersComponent,
     MapComponent,
-    GroupMapComponent
+    GroupMapComponent,
+    UserMapComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

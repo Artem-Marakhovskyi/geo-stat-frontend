@@ -31,4 +31,8 @@ export class UserService {
     return this.http.get<GeoStatUser>(UrlContaner.getUserByIdURL(id));
   }
 
+  public getUserByEmail(email: string) {
+    return this.http.get<GeoStatUser>(UrlContaner.getUserByEmailURL(email));
+  }
+
 }

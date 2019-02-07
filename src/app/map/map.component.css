@@ -5,3 +5,27 @@ agm-map {
     margin: 20px;
     float: left;
 }
+
+.map-definiton {
+    position: fixed;
+    overflow: auto;
+    top: 12vh;
+    bottom: 0;
+    float: left;
+    /* height: 85vh;  */
+    width: 20vw;
+    padding: 15px 30px;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(50, 50, 50, .4);
+}
+
+.user {
+    font-size: small;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: #e6e6e6;
+    border-color: #cccccc;
+    border: 1px solid;
+    border-radius: .5rem;
+}

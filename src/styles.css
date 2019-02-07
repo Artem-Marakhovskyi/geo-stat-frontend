@@ -37,6 +37,16 @@ body {
   margin: 30px;
 }
 
+.description {
+  font-family: cursive;
+  font-size: large;
+}
+
+.image-container {
+  text-align: center;
+  margin: 30px;
+}
+
 .menu-image {
   padding-top: 30px;
 }

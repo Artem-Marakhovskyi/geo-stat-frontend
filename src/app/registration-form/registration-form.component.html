@@ -4,7 +4,7 @@
       <div class="pure-control-group">
         <label for="email">Email address</label>
         <input id="email" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email address"
-          required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+          required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$">
         <div [hidden]="email.valid || email.pristine" class="validtion-error">
           Email has invalid format
         </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="pure-control-group">
         <label for="password">Repeat password</label>
-        <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat"
+        <input id="passwordRepeat" type="password" name="passwordRepeat" [(ngModel)]="user.repeatPassword"
           #passwordRepeat="ngModel" placeholder="Repeat password" required pattern=".{6,}">
         <div [hidden]="passwordRepeat.valid || passwordRepeat.pristine" class="validtion-error">
           Password repeat must contains at least 6 characters
