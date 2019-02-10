@@ -16,9 +16,7 @@ export class LocationService {
     private logger: LoggerService) { }
 
   public getLocations(): Observable<Location[]> {
-    const httpHeaders = new HttpHeaders().set('GeoStatAuthToken', localStorage.getItem('geostat-token'));
-    
-    return this.http.get<Location[]>(UrlContaner.getLocationsURL, httpHeaders);
+    return this.http.get<Location[]>(UrlContaner.getLocationsURL);
   }
 
   public getLocationsForUser(userId: string): Observable<Location[]> {

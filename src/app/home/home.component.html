@@ -1,11 +1,16 @@
-<div class="container">
-  <h1>
-    GeoStat application
-  </h1>
-  <div class="image-container">
-    <img src="https://img.icons8.com/cotton/2x/marker.png">
-  </div>
-  <div class="description">
-      Service which provides ability to track user’s location for a certain period and then display it on the map. Application consists of two parts: mobile app and web site. User installs the mobile application on his phone and it tracks his location periodically and sends it to the database. In mobile app or on the web site, user can see on the map where he has been most often for a certain period. Also user can create a group, invite his friends to it and watch the most visited places for all group members on the map.
+<div class="splash-container">
+  <div class="splash">
+    <h1 class="splash-head">GeoStat</h1>
+    <p class="splash-subhead">
+      Track your daily locations and watch the most visited places!
+    </p>
+    <p *ngIf="!isLogged">
+      <span id="login-btn"><a class="pure-button pure-button-primary" routerLink="/login">Log in</a></span>
+      <span><a class="pure-button pure-button-primary" routerLink="/register">Register</a></span>
+    </p>
+    <p *ngIf="isLogged">
+        <span id="login-btn"><a class="pure-button pure-button-primary" routerLink="/groupsUsers">My groups</a></span>
+        <span><a class="pure-button pure-button-primary" routerLink="/userMap">My map</a></span>
+      </p>
   </div>
 </div>

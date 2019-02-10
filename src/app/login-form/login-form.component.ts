@@ -23,10 +23,6 @@ export class LoginFormComponent implements OnInit {
     this.accountService.logIn(user);
   }
 
-  ngOnInit() {
-    if (this.accountService.isAuthorized()) {
-      this.router.navigate(['/']);
-    }
-  }
+  ngOnInit() { }
 
 }

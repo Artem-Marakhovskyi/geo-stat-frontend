@@ -4,6 +4,7 @@ import { HttpService } from 'src/common/services/http.service';
 import { User } from '../models/user';
 import { AccountService } from 'src/common/services/account.service';
 import { Router } from '@angular/router';
+import { AletrtifyService } from 'src/common/services/aletrtify.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class RegistrationFormComponent implements OnInit {
     private loggerService: LoggerService,
     private httpService: HttpService,
     private accountService: AccountService,
+    private alertifyService: AletrtifyService,
     private router: Router) { }
 
   public submit(user: User) {
@@ -28,14 +30,10 @@ export class RegistrationFormComponent implements OnInit {
     } else {
       this.user.password = '';
       this.user.repeatPassword = '';
-      alert('Passwords are not equal!');
+      this.alertifyService.error('Passwords are not equal!');
     }
   }
 
-  ngOnInit() { 
-    if (this.accountService.isAuthorized()) {
-      this.router.navigate(['/']);
-    }
-  }
+  ngOnInit() { }
 
 }

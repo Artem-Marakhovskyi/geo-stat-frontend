@@ -21,10 +21,6 @@ export class UserMapComponent implements OnInit {
     private accountService: AccountService) { }
 
   ngOnInit() {
-    if (!this.accountService.isAuthorized()) {
-      this.accountService.redirectToLogin();
-    }
-
     this.userService.getUserByEmail(localStorage.getItem('email'))
       .toPromise()
       .then((user: GeoStatUser) => {

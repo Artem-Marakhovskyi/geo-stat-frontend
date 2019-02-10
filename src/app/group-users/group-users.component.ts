@@ -55,10 +55,6 @@ export class GroupUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.accountService.isAuthorized()) {
-      this.accountService.redirectToLogin();
-    }
-
     this.userService.getUserByEmail(localStorage.getItem('email'))
       .toPromise()
       .then((user: GeoStatUser) => {

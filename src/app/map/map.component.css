@@ -1,19 +1,19 @@
 agm-map {
-    height: 89vh;
-    width: 97vw;
+    height: 85vh;
+    width: 71vw;
     box-shadow: 0 1px 2px 0 rgba(50, 50, 50, .4);
-    margin: 20px;
-    float: left;
+    margin: 30px 20px 18px 0;
+    float: right;
 }
 
 .map-definiton {
     position: fixed;
     overflow: auto;
-    top: 12vh;
+    top: 20vh;
     bottom: 0;
     float: left;
     /* height: 85vh;  */
-    width: 20vw;
+    width: 25vw;
     padding: 15px 30px;
     margin: 20px;
     background-color: #fff;
