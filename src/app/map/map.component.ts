@@ -6,6 +6,7 @@ import { UserService } from 'src/common/services/user.service';
 import { GroupService } from 'src/common/services/group.service';
 import { GeoStatUser } from '../models/geoStatUser';
 import { MapType } from 'src/common/enums';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -19,6 +20,7 @@ export class MapComponent implements OnInit {
   @Input() private type: MapType;
   private readonly groupType = MapType.Group;
   private index = 0;
+  private dateFilter = 'month';
 
   constructor(
     private locationService: LocationService,
@@ -31,6 +33,10 @@ export class MapComponent implements OnInit {
       this.mapConfiguration.shuffleColors();
     }
   }
+
+  // private filter() {
+  //   alert(this.dateFilter);
+  // }
 
   private getStyles() {
     let myStyles = {

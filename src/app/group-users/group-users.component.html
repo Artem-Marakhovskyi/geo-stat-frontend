@@ -1,39 +1,32 @@
 <button *ngIf="!mode" class="back-button pure-button pure-button-primary" (click)="backToGroups()">Back</button>
 <div *ngIf="mode">
-  <div class="container" style="color: white;">
+  <div class="container">
     <h2>Groups users:</h2>
-    <div class="pure-g" *ngFor="let gu of groupsWithUsers">
-      <div class="pure-u-1-3">
-        <p><b>Label:</b> {{gu.label}}</p>
-      </div>
-      <div class="pure-u-1-3">
-        <p><b>Creator Name:</b> {{gu.creatorName}}</p>
-      </div>
-      <button class="pure-button button-success" (click)="showMap(gu.users, gu.label)">Watch map</button>
-      <div class="pure-u-1-3"></div>
-      <div class="container" *ngFor="let u of gu.users">
-        <div class="user-item">
-          <p><b>Email:</b> {{u.email}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- <div class="container">
-    <h2>Groups users:</h2>
-  </div>
-  <div *ngFor="let gu of groupsWithUsers">
-    <div class="location-item">
+    <div class="group group-container" *ngFor="let gu of groupsWithUsers">
       <button class="pure-button button-success" (click)="showMap(gu.users, gu.label)">Watch map</button>
       <p><b>Label:</b> {{gu.label}}</p>
       <p><b>Creator Name:</b> {{gu.creatorName}}</p>
-      <p class="members-contaner"><b>Members:</b></p>
-      <div *ngFor="let u of gu.users">
-        <div class="user-item">
-          <p><b>Email:</b> {{u.email}}</p>
-        </div>
+      <hr size="2" style="color: #2d3e50;">
+      <div class="container">
+        <table class="container-table pure-table">
+          <thead class="container-thead">
+            <tr>
+              <th>#</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of gu.users; let i = index;">
+              <td>{{i+1}}</td>
+              <td>
+                <p><b>Email:</b> {{u.email}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
 <div *ngIf="mode === false">
   <app-map [usersLocations]="usersLocationsForMap" [users]="usersForMap" [groupName]="groupNameForMap" [type]="type">

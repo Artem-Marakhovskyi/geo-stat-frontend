@@ -27,6 +27,7 @@ export class GroupUsersComponent implements OnInit {
   private usersLocationsForMap = new Array<Location[]>(0);
   private groupNameForMap: string;
   private mode = true;
+  private index = 0;
 
 
   constructor(
@@ -77,7 +78,6 @@ export class GroupUsersComponent implements OnInit {
                 .filter(u => this.groupUsers
                   .some(gu => u.id === gu.userId && gu.groupId === element.id));
 
-              console.log(element.creatorId);
               element.creatorName = this.users.find(u => u.id === element.creatorId).email;
 
               this.groupsWithUsers.push(new GroupUsers(

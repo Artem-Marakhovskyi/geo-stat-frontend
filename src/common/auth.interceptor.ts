@@ -8,8 +8,6 @@ export class AuthInterceptor implements HttpInterceptor {
             headers: req.headers.set('GeoStatAuthToken', localStorage.getItem('geostat-token'))
         });
 
-        console.log(localStorage.getItem('geostat-token'));
-
         return next.handle(req);
 
     }

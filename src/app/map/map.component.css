@@ -6,6 +6,10 @@ agm-map {
     float: right;
 }
 
+.name-label {
+    color: #2d3e50;
+}
+
 .map-definiton {
     position: fixed;
     overflow: auto;
