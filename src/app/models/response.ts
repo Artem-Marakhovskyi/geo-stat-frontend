@@ -1,3 +1,5 @@
 export class Response {
-    token: string;
+    UserEmail: string;
+    UserId: string;
+    Token: string;
 }

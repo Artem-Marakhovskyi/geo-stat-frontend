@@ -3,8 +3,7 @@
     <h1 class="name-label">{{groupName}}</h1>
     <hr>
     <ul class="user" *ngFor="let user of users; let i = index">
-      <li>{{user.email}} <span> <img
-            src="{{'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[i]}}"></span>
+      <li>{{user.email}} <span> <img src="{{'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[i]}}"></span>
       </li>
     </ul>
   </div>
@@ -13,14 +12,22 @@
     <hr>
     <form>
       <h3 class="name-label">Filter for the last:</h3>
-      <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" value="day" (click)="filter()"> Day
-      <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" value="week" (click)="filter()"> Week
-      <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" value="month" (click)="filter()"> Month
-      <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" value="allTime" (click)="filter()"> All time
+      <div>
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="onChange()" value="day"> Day
+      </div>
+      <div>
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="onChange()" value="week"> Week
+      </div>
+      <div>
+        <input type="radio" name="dateFilter" (ngModelChange)="onChange()" [(ngModel)]="dateFilter" value="month"> Month
+      </div>
+      <div>
+        <input type="radio" name="dateFilter" (ngModelChange)="onChange()" [(ngModel)]="dateFilter" value="allTime"> All time
+      </div>
     </form>
   </div>
-  <agm-map [latitude]="this.mapConfiguration.kharkivLatitude"
-    [longitude]="this.mapConfiguration.kharkivLongitude" [zoom]="this.mapConfiguration.zoom">
+  <agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude"
+    [zoom]="this.mapConfiguration.zoom">
     <agm-marker *ngFor="let locations of usersLocations; let i = index">
       {{index+1}}
       <div *ngIf="type !== groupType">

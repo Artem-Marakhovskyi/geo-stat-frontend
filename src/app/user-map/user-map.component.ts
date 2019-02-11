@@ -21,15 +21,11 @@ export class UserMapComponent implements OnInit {
     private accountService: AccountService) { }
 
   ngOnInit() {
-    // this.userService.getUserByEmail(localStorage.getItem('email'))
-    //   .toPromise()
-    //   .then((user: GeoStatUser) => {
-    //     this.locationService.getLocationsForUser(user[0].id)
-    //       .subscribe(data => {
-    //         this.userLocations = data;
-    //       });
-    //   });
-
+    this.locationService.getLocationsForUser(this.accountService.getUserId())
+      .subscribe(data => {
+        this.userLocations = data;
+        localStorage.setItem('locations', JSON.stringify(data));
+      });
   }
 
 }

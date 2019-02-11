@@ -9,6 +9,7 @@ import { AccountService } from 'src/common/services/account.service';
 })
 export class AppComponent implements OnInit, DoCheck {
   private title = 'geo-stat';
+  private userName: string;
   public isAuthorized: boolean;
 
   constructor(
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.isAuthorized = this.account.isAuthorized();
+
+    this.userName = this.isAuthorized ? this.account.getUserEmail() : '';
   }
 
   ngDoCheck() {

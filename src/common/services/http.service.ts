@@ -13,8 +13,8 @@ export class HttpService {
       return this.http.get<T>(url);
   }
 
-  public post(url: string, body: any, httpHeaders?: HttpHeaders) {
-      return this.http.post(url, body, { headers: httpHeaders });
+  public post(url: string, body: any) {
+      return this.http.post(url, body);
   }
 
 }

@@ -6,7 +6,6 @@ import { UserService } from 'src/common/services/user.service';
 import { GroupService } from 'src/common/services/group.service';
 import { GeoStatUser } from '../models/geoStatUser';
 import { MapType } from 'src/common/enums';
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -29,14 +28,41 @@ export class MapComponent implements OnInit {
     private mapConfiguration: MapConfiguration) { }
 
   ngOnInit() {
+    localStorage.setItem('locations', JSON.stringify(this.usersLocations));
+
     if (this.type === MapType.Group) {
       this.mapConfiguration.shuffleColors();
     }
   }
 
-  // private filter() {
-  //   alert(this.dateFilter);
-  // }
+  private onChange() {
+    let date = new Date();
+    this.usersLocations = JSON.parse(localStorage.getItem('locations'));
+
+    switch (this.dateFilter) {
+      case 'day':
+        console.log(this.usersLocations);
+
+        this.usersLocations.forEach((userLocations: Location[]) => {
+          userLocations.filter((location: Location) => {
+            let currentDate = date.getDate();
+            location.dateTime.valueOf() > date.setDate(currentDate - 1).valueOf()
+          })
+        });
+        break;
+      case 'week':
+
+        break;
+      case 'month':
+
+        break;
+      case 'allTime':
+
+        break;
+      default:
+        break;
+    }
+  }
 
   private getStyles() {
     let myStyles = {

@@ -6,8 +6,8 @@ export class UrlContaner {
     public static readonly getGroupsURL = UrlContaner.commonURL + '/tables/Group';
     public static readonly getGroupUsersURL = UrlContaner.commonURL + '/tables/GroupUser';
     public static readonly getUsersURL = UrlContaner.commonURL + '/tables/GeoStatUser';
-    public static readonly registerURL = UrlContaner.commonURL + '/api/account/register/post';
-    public static readonly authURL = UrlContaner.commonURL + '/api/account/authorise/post';
+    public static readonly registerURL = UrlContaner.commonURL + '/api/account/register';
+    public static readonly authURL = UrlContaner.commonURL + '/api/account/auth';
 
     public static getLocationsFromDateURL(date: Date) {
         return UrlContaner.getLocationsURL + `$filter=dateTime gt DateTimeOffset\'${date}\'`;

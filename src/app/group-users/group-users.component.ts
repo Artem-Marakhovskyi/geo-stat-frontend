@@ -56,9 +56,6 @@ export class GroupUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserByEmail(localStorage.getItem('email'))
-      .toPromise()
-      .then((user: GeoStatUser) => {
         forkJoin(
           this.groupService.getGroups(),
           this.userService.getUsers(),
@@ -90,8 +87,6 @@ export class GroupUsersComponent implements OnInit {
             }
           });
         });
-      })
-
   }
 
 }
