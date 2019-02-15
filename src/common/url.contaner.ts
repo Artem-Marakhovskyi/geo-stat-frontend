@@ -9,8 +9,9 @@ export class UrlContaner {
     public static readonly registerURL = UrlContaner.commonURL + '/api/account/register';
     public static readonly authURL = UrlContaner.commonURL + '/api/account/auth';
 
-    public static getLocationsFromDateURL(date: Date) {
-        return UrlContaner.getLocationsURL + `$filter=dateTime gt DateTimeOffset\'${date}\'`;
+    public static getLocationsForUserFromDateURL(date: Date, userId: string) {
+        return UrlContaner.getLocationsURL + `?$filter=dateTime gt DateTimeOffset\'${date.toISOString()}\' and UserId eq \'${userId}\'`;
+        // dateTime gt DateTimeOffset'2019-02-05' and UserId eq 'd435b99e7fe64e808a7478abb7e140cf'
     }
 
     public static getLocationsForUserURL(userId: string) {

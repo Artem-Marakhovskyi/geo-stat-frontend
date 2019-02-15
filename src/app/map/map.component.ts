@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
 import { MapConfiguration } from './map.configuration';
 import { UserService } from 'src/common/services/user.service';
 import { GroupService } from 'src/common/services/group.service';
 import { GeoStatUser } from '../models/geoStatUser';
-import { MapType } from 'src/common/enums';
+import { MapType, FilterInterval } from 'src/common/enums';
+import { DateService } from 'src/common/services/date.service';
 
 @Component({
   selector: 'app-map',
@@ -13,55 +14,59 @@ import { MapType } from 'src/common/enums';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  @Input() private usersLocations = new Array<Location[]>(0);
+  @Input() private usersLocations: Array<Location[]>;
+  @Input() private userLocations: Array<Location>;
   @Input() private users: GeoStatUser[];
   @Input() private groupName: string;
   @Input() private type: MapType;
+  @Output() private onFilterChange = new EventEmitter<boolean>();
   private readonly groupType = MapType.Group;
-  private index = 0;
-  private dateFilter = 'month';
+  private currentFilterPeriod = this.mapConfiguration.filterInterval;
+  private dateFilter = this.mapConfiguration.dateFilter;
 
   constructor(
     private locationService: LocationService,
     private userService: UserService,
     private groupService: GroupService,
-    private mapConfiguration: MapConfiguration) { }
+    private mapConfiguration: MapConfiguration,
+    private dateService: DateService) { }
 
   ngOnInit() {
-    localStorage.setItem('locations', JSON.stringify(this.usersLocations));
-
     if (this.type === MapType.Group) {
       this.mapConfiguration.shuffleColors();
     }
   }
 
-  private onChange() {
-    let date = new Date();
-    this.usersLocations = JSON.parse(localStorage.getItem('locations'));
+  private getAllLocations(increased: any) {
+    this.onFilterChange.emit(increased);
+  }
 
-    switch (this.dateFilter) {
-      case 'day':
-        console.log(this.usersLocations);
+  private changeFilter() {
+    this.currentFilterPeriod = this.dateService.setFilterPeriod(this.dateFilter);
 
-        this.usersLocations.forEach((userLocations: Location[]) => {
-          userLocations.filter((location: Location) => {
-            let currentDate = date.getDate();
-            location.dateTime.valueOf() > date.setDate(currentDate - 1).valueOf()
-          })
-        });
-        break;
-      case 'week':
+    if (this.type === MapType.Personal) {
+      this.userLocations = JSON.parse(localStorage.getItem('locations'));
 
-        break;
-      case 'month':
+      if (this.currentFilterPeriod > this.mapConfiguration.filterInterval) {
+        this.getAllLocations(true);
+        this.currentFilterPeriod = FilterInterval.AllTime;
+      }
 
-        break;
-      case 'allTime':
-
-        break;
-      default:
-        break;
+      switch (this.dateFilter) {
+        case 'day':
+          this.userLocations = this.fillterByPeriodForUser(this.userLocations, FilterInterval.Day);
+          break;
+        case 'week':
+          this.userLocations = this.fillterByPeriodForUser(this.userLocations, FilterInterval.Week);
+          break;
+        case 'month':
+          this.userLocations = this.fillterByPeriodForUser(this.userLocations, FilterInterval.Month);
+          break;
+        default:
+          break;
+      }
     }
+
   }
 
   private getStyles() {
@@ -71,6 +76,29 @@ export class MapComponent implements OnInit {
     };
 
     return myStyles;
+  }
+
+  private fillterByPeriodForUser(locations: Location[], period: FilterInterval): Location[] {
+    let currentDate = new Date();
+    let filterDate: number;
+
+    switch (period) {
+      case FilterInterval.Day:
+        filterDate = this.dateService.getDateOneDayBefore().valueOf();
+        break;
+      case FilterInterval.Week:
+        filterDate = this.dateService.getDateOneWeekBefore().valueOf();
+        break;
+      case FilterInterval.Month:
+        filterDate = this.dateService.getDateOneMonthBefore().valueOf();
+        break;
+      default:
+        return locations;
+    }
+
+    return this.userLocations.filter((location: Location) =>
+      new Date(location.dateTime).valueOf() > filterDate.valueOf()
+    );
   }
 
 }
