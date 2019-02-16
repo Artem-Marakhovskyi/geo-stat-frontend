@@ -11,6 +11,7 @@ import { AccountService } from 'src/common/services/account.service';
 import { MapType } from 'src/common/enums';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
+import { DateService } from 'src/common/services/date.service';
 
 @Component({
   selector: 'app-group-users',
@@ -35,12 +36,30 @@ export class GroupUsersComponent implements OnInit {
     private userService: UserService,
     private locationService: LocationService,
     private loggerService: LoggerService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private dateService: DateService) { }
 
   public showMap(users: GeoStatUser[], groupName: string) {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
+    
+    this.fetchData().then(() => {
+      localStorage.setItem('locations', JSON.stringify(this.usersLocationsForMap));
+    });
 
+    this.mode = false;
+  }
+
+  async fetchData() {
+    await this.usersForMap.forEach(user => {
+      this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(),user.id)
+        .subscribe((data: Location[]) => {
+          this.usersLocationsForMap.push(data);
+        });
+    });
+  }
+
+  private onFilterChange(increased: any) {
     this.usersForMap.forEach(user => {
       this.locationService.getLocationsForUser(user.id)
         .subscribe((data: Location[]) => {
@@ -48,7 +67,7 @@ export class GroupUsersComponent implements OnInit {
         })
     });
 
-    this.mode = false;
+    localStorage.setItem('locations', JSON.stringify(this.usersLocationsForMap));
   }
 
   public backToGroups() {
@@ -56,37 +75,37 @@ export class GroupUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-        forkJoin(
-          this.groupService.getGroups(),
-          this.userService.getUsers(),
-          this.userService.getGroupUsers()
-        ).subscribe(([groupsData, usersData, groupUsersData]) => {
-          this.groups = groupsData;
-          this.users = usersData;
-          this.groupUsers = groupUsersData;
+    forkJoin(
+      this.groupService.getGroups(),
+      this.userService.getUsers(),
+      this.userService.getGroupUsers()
+    ).subscribe(([groupsData, usersData, groupUsersData]) => {
+      this.groups = groupsData;
+      this.users = usersData;
+      this.groupUsers = groupUsersData;
 
 
-          this.groups.forEach(element => {
-            const isNotEmptyGroup = this.groupUsers
-              .some(gu => gu.groupId === element.id);
+      this.groups.forEach(element => {
+        const isNotEmptyGroup = this.groupUsers
+          .some(gu => gu.groupId === element.id);
 
-            if (isNotEmptyGroup) {
-              const currentGroupUsers = this.users
-                .filter(u => this.groupUsers
-                  .some(gu => u.id === gu.userId && gu.groupId === element.id));
+        if (isNotEmptyGroup) {
+          const currentGroupUsers = this.users
+            .filter(u => this.groupUsers
+              .some(gu => u.id === gu.userId && gu.groupId === element.id));
 
-              element.creatorName = this.users.find(u => u.id === element.creatorId).email;
+          element.creatorName = this.users.find(u => u.id === element.creatorId).email;
 
-              this.groupsWithUsers.push(new GroupUsers(
-                element.id,
-                element.label,
-                element.creatorId,
-                element.creatorName,
-                currentGroupUsers
-              ));
-            }
-          });
-        });
+          this.groupsWithUsers.push(new GroupUsers(
+            element.id,
+            element.label,
+            element.creatorId,
+            element.creatorName,
+            currentGroupUsers
+          ));
+        }
+      });
+    });
   }
 
 }

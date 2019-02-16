@@ -3,5 +3,4 @@ export class Group {
     label: string;
     creatorId: string;
     creatorName: string;
-    groupId: string;
 }

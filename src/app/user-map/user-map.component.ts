@@ -22,7 +22,7 @@ export class UserMapComponent implements OnInit {
     private dateService: DateService) { }
 
   ngOnInit() {
-    this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), localStorage.getItem('user-id'))
+    this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), this.accountService.getUserId())
       .subscribe(data => {
         this.userLocations = data;
         localStorage.setItem('locations', JSON.stringify(data));
@@ -30,7 +30,7 @@ export class UserMapComponent implements OnInit {
   }
 
   private onFilterChange(increased: any) {
-    this.locationService.getLocationsForUser(localStorage.getItem('user-id'))
+    this.locationService.getLocationsForUser(this.accountService.getUserId())
       .subscribe(data => {
         this.userLocations = data;
         localStorage.setItem('locations', JSON.stringify(data));

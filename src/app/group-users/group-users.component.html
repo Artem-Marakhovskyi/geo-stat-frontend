@@ -29,6 +29,6 @@
   </div>
 </div>
 <div *ngIf="mode === false">
-  <app-map [usersLocations]="usersLocationsForMap" [users]="usersForMap" [groupName]="groupNameForMap" [type]="type">
+  <app-map (onFilterChange)="onFilterChange($event)" [usersLocations]="usersLocationsForMap" [users]="usersForMap" [groupName]="groupNameForMap" [type]="type">
   </app-map>
 </div>
