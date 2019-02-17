@@ -29,6 +29,7 @@ export class GroupUsersComponent implements OnInit {
   private groupNameForMap: string;
   private mode = true;
   private index = 0;
+  // private promises = new Array();
 
 
   constructor(
@@ -42,21 +43,34 @@ export class GroupUsersComponent implements OnInit {
   public showMap(users: GeoStatUser[], groupName: string) {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
-    
-    this.fetchData().then(() => {
-      localStorage.setItem('locations', JSON.stringify(this.usersLocationsForMap));
-    });
+
+    Promise.all(this.fetchData())
+      .then(values => {
+        // values.forEach(element => {
+        //   element.subscribe(locations => {
+        //     this.usersLocationsForMap.push(locations);
+        //   });
+        // });
+        // console.log(values);
+        console.log(this.usersLocationsForMap);
+        localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
+      })
+
 
     this.mode = false;
   }
 
-  async fetchData() {
-    await this.usersForMap.forEach(user => {
-      this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(),user.id)
-        .subscribe((data: Location[]) => {
-          this.usersLocationsForMap.push(data);
-        });
+  fetchData() {
+    let promises = new Array();
+
+    this.usersForMap.forEach(user => {
+      promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
+        .subscribe(locations => {
+          this.usersLocationsForMap.push(locations);
+        }));
     });
+
+    return promises;
   }
 
   private onFilterChange(increased: any) {

@@ -1,20 +1,44 @@
 <div>
+  <div class="map-wrapper">
+    <agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude"
+      [zoom]="this.mapConfiguration.zoom">
+      <div *ngIf="type === groupType">
+        <div *ngFor="let locations of usersLocations; let j = index">
+          <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude"
+            [iconUrl]="{
+              url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[j]
+            }"></agm-marker>
+        </div>
+      </div>
+      <div *ngIf="type !== groupType">
+        <agm-marker *ngFor="let locations of userLocations">
+          <agm-marker [latitude]="locations.latitude" [longitude]="locations.longitude" [iconUrl]="{
+              url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + 'FF0000'
+            }"></agm-marker>
+        </agm-marker>
+      </div>
+    </agm-map>
+  </div>
   <div class="map-definiton" *ngIf="type === groupType">
     <h1 class="name-label">{{groupName}}</h1>
     <hr>
     <form>
       <h3 class="name-label">Filter for the last:</h3>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="day"> Day
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="day">
+        Day
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="week"> Week
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="week">
+        Week
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="month"> Month
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="month">
+        Month
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="allTime"> All time
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="allTime">
+        All time
       </div>
     </form>
     <hr>
@@ -24,42 +48,28 @@
       </li>
     </ul>
   </div>
-  <div class="map-definiton" [ngStyle]="{'top': '9vh'}" *ngIf="type !== groupType">
+  <div class="map-definiton" *ngIf="type !== groupType">
     <h1 class="name-label">Personal locations</h1>
     <hr>
     <form>
       <h3 class="name-label">Filter for the last:</h3>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="day"> Day
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="day">
+        Day
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="week"> Week
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="week">
+        Week
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="month"> Month
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="month">
+        Month
       </div>
       <div>
-        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="allTime"> All time
+        <input type="radio" name="dateFilter" [(ngModel)]="dateFilter" (ngModelChange)="changeFilter()" value="allTime">
+        All time
       </div>
     </form>
   </div>
-  <agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude"
-    [zoom]="this.mapConfiguration.zoom">
-    <div *ngIf="type === groupType">
-    <div *ngFor="let locations of usersLocations; let j = index">
-        <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude"
-        [iconUrl]="{
-          url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[j]
-        }"></agm-marker>
-      </div>
-    </div>
 
-    <div *ngIf="type !== groupType">
-      <agm-marker *ngFor="let locations of userLocations">
-        <agm-marker [latitude]="locations.latitude" [longitude]="locations.longitude" [iconUrl]="{
-          url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + 'FF0000'
-        }"></agm-marker>
-      </agm-marker>
-    </div>
-  </agm-map>
 </div>
