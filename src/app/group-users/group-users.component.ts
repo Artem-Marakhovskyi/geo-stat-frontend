@@ -56,6 +56,7 @@ export class GroupUsersComponent implements OnInit {
 
   getLocationsForUsers(users: GeoStatUser[]) {
     let promises = new Array();
+    this.usersLocationsForMap = new Array<Location[]>(0);
 
     this.users.forEach(user => {
       promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)

@@ -1,7 +1,15 @@
 <button *ngIf="!mode" class="back-button pure-button-primary pure-button" (click)="backToGroups()">Back</button>
 <div *ngIf="mode">
   <div class="container">
-    <h2>Groups users:</h2>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <h2>Groups users:</h2>
+      </div>
+      <div class="pure-u-1-2">
+        <a class="group-btn pure-button pure-button-primary" routerLink="/groupCreating" style="float: right;">Create
+          group</a>
+      </div>
+    </div>
     <div class="group group-container" *ngFor="let gu of groupsWithUsers">
       <button class="pure-button button-success" (click)="showMap(gu.users, gu.label)">Watch map</button>
       <p><b>Label:</b> {{gu.label}}</p>
@@ -29,6 +37,7 @@
   </div>
 </div>
 <div *ngIf="mode === false">
-  <app-map (onFilterChange)="onFilterChange($event)" [usersLocations]="usersLocationsForMap" [users]="usersForMap" [groupName]="groupNameForMap" [type]="type">
+  <app-map (onFilterChange)="onFilterChange($event)" [usersLocations]="usersLocationsForMap" [users]="usersForMap"
+    [groupName]="groupNameForMap" [type]="type">
   </app-map>
 </div>

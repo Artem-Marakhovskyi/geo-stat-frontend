@@ -7,6 +7,7 @@ import { UserMapComponent } from './user-map/user-map.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { LoggedGuard } from 'src/common/guards/logged.guard';
+import { GroupCreatingComponent } from './group-creating/group-creating.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'userMap',
     component: UserMapComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'groupCreating',
+    component: GroupCreatingComponent,
     canActivate: [AuthGuard]
   },
   {

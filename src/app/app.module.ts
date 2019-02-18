@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from 'src/common/auth.interceptor';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { AletrtifyService } from 'src/common/services/aletrtify.service';
+import { GroupCreatingComponent } from './group-creating/group-creating.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AletrtifyService } from 'src/common/services/aletrtify.service';
     GroupUsersComponent,
     MapComponent,
     UserMapComponent,
-    HomeComponent
+    HomeComponent,
+    GroupCreatingComponent
   ],
   imports: [
     BrowserModule,

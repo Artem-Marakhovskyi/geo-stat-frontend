@@ -69,15 +69,6 @@ export class MapComponent implements OnInit {
 
   }
 
-  private getStyles() {
-    let myStyles = {
-      'width': this.type === MapType.Group ? '71vw' : '97vw',
-      'float': this.type === MapType.Group ? 'right' : 'left'
-    };
-
-    return myStyles;
-  }
-
   private fillterByPeriodForUser(locations: Location[], period: FilterInterval): Location[] {
     let currentDate = new Date();
     let filterDate: number;
@@ -96,9 +87,36 @@ export class MapComponent implements OnInit {
         return locations;
     }
 
-    return this.userLocations.filter((location: Location) =>
+    return locations.filter((location: Location) =>
       new Date(location.dateTime).valueOf() > filterDate.valueOf()
     );
+  }
+
+  private fillterByPeriodForGroup(locations: Location[][], period: FilterInterval): Location[][] {
+    let currentDate = new Date();
+    let filterDate: number;
+
+    switch (period) {
+      case FilterInterval.Day:
+        filterDate = this.dateService.getDateOneDayBefore().valueOf();
+        break;
+      case FilterInterval.Week:
+        filterDate = this.dateService.getDateOneWeekBefore().valueOf();
+        break;
+      case FilterInterval.Month:
+        filterDate = this.dateService.getDateOneMonthBefore().valueOf();
+        break;
+      default:
+        return locations;
+    }
+
+    locations.forEach(element => {
+      element.filter((location: Location) =>
+        new Date(location.dateTime).valueOf() > filterDate.valueOf()
+      );
+    });
+
+    return locations;
   }
 
 }
