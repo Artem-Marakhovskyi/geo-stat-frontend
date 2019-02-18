@@ -44,15 +44,9 @@ export class GroupUsersComponent implements OnInit {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
 
-    Promise.all(this.fetchData())
-      .then(values => {
-        // values.forEach(element => {
-        //   element.subscribe(locations => {
-        //     this.usersLocationsForMap.push(locations);
-        //   });
-        // });
-        // console.log(values);
-        console.log(this.usersLocationsForMap);
+    Promise.all(this.getLocationsForUsers(users))
+      .then(() => {
+        // console.log(this.usersLocationsForMap);
         localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
       })
 
@@ -60,10 +54,10 @@ export class GroupUsersComponent implements OnInit {
     this.mode = false;
   }
 
-  fetchData() {
+  getLocationsForUsers(users: GeoStatUser[]) {
     let promises = new Array();
 
-    this.usersForMap.forEach(user => {
+    this.users.forEach(user => {
       promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
         .subscribe(locations => {
           this.usersLocationsForMap.push(locations);
@@ -81,7 +75,7 @@ export class GroupUsersComponent implements OnInit {
         })
     });
 
-    localStorage.setItem('locations', JSON.stringify(this.usersLocationsForMap));
+    localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
   }
 
   public backToGroups() {

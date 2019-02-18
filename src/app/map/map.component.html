@@ -3,8 +3,8 @@
     <agm-map [latitude]="this.mapConfiguration.kharkivLatitude" [longitude]="this.mapConfiguration.kharkivLongitude"
       [zoom]="this.mapConfiguration.zoom">
       <div *ngIf="type === groupType">
-        <div *ngFor="let locations of usersLocations; let j = index">
-          <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude"
+        <div *ngFor="let locations of usersLocations">
+          <agm-marker *ngFor="let location of locations; let j = index" [latitude]="location.latitude" [longitude]="location.longitude"
             [iconUrl]="{
               url: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + this.mapConfiguration.colors[j]
             }"></agm-marker>
