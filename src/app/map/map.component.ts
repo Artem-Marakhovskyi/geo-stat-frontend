@@ -22,6 +22,7 @@ export class MapComponent implements OnInit {
   @Output() private onFilterChange = new EventEmitter<boolean>();
   private readonly groupType = MapType.Group;
   private currentFilterPeriod = this.mapConfiguration.filterInterval;
+  private loadedFilterPeriod = this.mapConfiguration.filterInterval;
   private dateFilter = this.mapConfiguration.dateFilter;
 
   constructor(
@@ -47,9 +48,10 @@ export class MapComponent implements OnInit {
     if (this.type === MapType.Personal) {
       this.userLocations = JSON.parse(localStorage.getItem('locations'));
 
-      if (this.currentFilterPeriod > this.mapConfiguration.filterInterval) {
+      if (this.currentFilterPeriod > this.loadedFilterPeriod) {
         this.getAllLocations(true);
         this.currentFilterPeriod = FilterInterval.AllTime;
+        this.loadedFilterPeriod = FilterInterval.AllTime;
       }
 
       switch (this.dateFilter) {
@@ -67,6 +69,29 @@ export class MapComponent implements OnInit {
       }
     }
 
+    if (this.type === MapType.Group) {
+      this.usersLocations = JSON.parse(localStorage.getItem('locationsForGroup'));
+
+      if (this.currentFilterPeriod > this.loadedFilterPeriod) {
+        this.getAllLocations(true);
+        this.currentFilterPeriod = FilterInterval.AllTime;
+        this.loadedFilterPeriod = FilterInterval.AllTime;
+      }
+
+      switch (this.dateFilter) {
+        case 'day':
+          this.usersLocations = this.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Day);
+          break;
+        case 'week':
+          this.usersLocations = this.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Week);
+          break;
+        case 'month':
+          this.usersLocations = this.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Month);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   private fillterByPeriodForUser(locations: Location[], period: FilterInterval): Location[] {
@@ -95,6 +120,7 @@ export class MapComponent implements OnInit {
   private fillterByPeriodForGroup(locations: Location[][], period: FilterInterval): Location[][] {
     let currentDate = new Date();
     let filterDate: number;
+    let resultLocations: Location[][] = new Array<Location[]>(0);
 
     switch (period) {
       case FilterInterval.Day:
@@ -111,12 +137,14 @@ export class MapComponent implements OnInit {
     }
 
     locations.forEach(element => {
-      element.filter((location: Location) =>
+      resultLocations.push(element.filter((location: Location) =>
         new Date(location.dateTime).valueOf() > filterDate.valueOf()
-      );
+      ))
     });
 
-    return locations;
+    console.log(resultLocations)
+
+    return resultLocations;
   }
 
 }

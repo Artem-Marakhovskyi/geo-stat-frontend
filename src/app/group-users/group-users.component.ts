@@ -4,7 +4,7 @@ import { GroupUser } from '../models/groupUser';
 import { Group } from '../models/group';
 import { GeoStatUser } from '../models/geoStatUser';
 import { GroupUsers } from '../models/groupUsers';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { GroupService } from 'src/common/services/group.service';
 import { UserService } from 'src/common/services/user.service';
 import { AccountService } from 'src/common/services/account.service';
@@ -43,11 +43,11 @@ export class GroupUsersComponent implements OnInit {
   public showMap(users: GeoStatUser[], groupName: string) {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
+    // localStorage.setItem('currentGroupUsers', JSON.stringify(users));
 
     Promise.all(this.getLocationsForUsers(users))
-      .then(() => {
-        // console.log(this.usersLocationsForMap);
-        localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
+      .then(res => {
+        // localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
       })
 
 
@@ -58,10 +58,11 @@ export class GroupUsersComponent implements OnInit {
     let promises = new Array();
     this.usersLocationsForMap = new Array<Location[]>(0);
 
-    this.users.forEach(user => {
+    users.forEach(user => {
       promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
         .subscribe(locations => {
           this.usersLocationsForMap.push(locations);
+          localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
         }));
     });
 
@@ -69,14 +70,14 @@ export class GroupUsersComponent implements OnInit {
   }
 
   private onFilterChange(increased: any) {
+    this.usersLocationsForMap = this.usersLocationsForMap.slice(0, 0);
     this.usersForMap.forEach(user => {
       this.locationService.getLocationsForUser(user.id)
         .subscribe((data: Location[]) => {
           this.usersLocationsForMap.push(data);
+          localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
         })
     });
-
-    localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
   }
 
   public backToGroups() {
