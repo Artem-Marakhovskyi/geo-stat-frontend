@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
 import { AccountService } from 'src/common/services/account.service';
-import { MapType } from 'src/common/enums';
+import { MapType, FilterInterval } from 'src/common/enums';
 import { UserService } from 'src/common/services/user.service';
 import { DateService } from 'src/common/services/date.service';
 import { LocalDataService } from 'src/common/services/local-data.service';
+import { DataProviderService } from 'src/common/services/data-provider.service';
 
 @Component({
   selector: 'app-user-map',
@@ -21,21 +22,25 @@ export class UserMapComponent implements OnInit {
     private userService: UserService,
     private accountService: AccountService,
     private localDataService: LocalDataService,
+    private dataProvider: DataProviderService,
     private dateService: DateService) { }
 
   ngOnInit() {
-    this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), this.accountService.getUserId())
-      .subscribe(data => {
-        this.userLocations = data;
-        this.localDataService.setLocationsForUser(data);
+    this.dataProvider.getLocationsForUserFromDate(FilterInterval.Week)
+      .then(locations => {
+        this.userLocations = locations;
       });
+    // this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), this.accountService.getUserId())
+    //   .subscribe(data => {
+    //     this.userLocations = data;
+    //     this.localDataService.setLocationsForUser(data);
+    //   });
   }
 
   private onFilterChange(increased: any) {
-    this.locationService.getLocationsForUser(this.accountService.getUserId())
-      .subscribe(data => {
-        this.userLocations = data;
-        this.localDataService.setLocationsForUser(data);
+    this.dataProvider.getLocationsForUser()
+      .then(locations => {
+        this.userLocations = locations;
       });
   }
 

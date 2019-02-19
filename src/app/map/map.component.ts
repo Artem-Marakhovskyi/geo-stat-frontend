@@ -50,6 +50,11 @@ export class MapComponent implements OnInit {
     this.currentFilterPeriod = this.dateService.setFilterPeriod(this.dateFilter);
 
     if (this.type === MapType.Personal) {
+      let lastUpdate = this.localDataService.getUserLocationsUpdateDate();
+      if (!this.dateService.isDateTimeValid(lastUpdate)) {
+        this.getAllLocations(true);
+      }
+
       this.userLocations = this.localDataService.getLocationsForUser();
 
       if (this.currentFilterPeriod > this.loadedFilterPeriod) {
@@ -98,5 +103,5 @@ export class MapComponent implements OnInit {
     }
   }
 
-  
+
 }

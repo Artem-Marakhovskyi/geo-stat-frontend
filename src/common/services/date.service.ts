@@ -5,8 +5,13 @@ import { FilterInterval } from '../enums';
   providedIn: 'root'
 })
 export class DateService {
+  private readonly timeIntervalForDataStoring = 1;
 
   constructor() { }
+
+  public isDateTimeValid(dateTime: Date): boolean {
+    return dateTime.setMinutes(dateTime.getMinutes() + this.timeIntervalForDataStoring).valueOf() > new Date().valueOf();
+  }
 
   public getDateOneDayBefore() {
     let date = new Date();
@@ -24,6 +29,21 @@ export class DateService {
     let date = new Date();
 
     return new Date(date.setMonth(date.getMonth() - 1));
+  }
+
+  public getDateBeforeInterval(interval: FilterInterval) {
+    let date = new Date();
+
+    switch (interval) {
+      case FilterInterval.Day:
+        return this.getDateOneDayBefore();
+      case FilterInterval.Week:
+        return this.getDateOneWeekBefore();
+      case FilterInterval.Month:
+        return this.getDateOneMonthBefore();
+      default:
+        return new Date(date.setMonth(date.getMonth() - 100));
+    }
   }
 
   public getStringFromDate(date: Date) {

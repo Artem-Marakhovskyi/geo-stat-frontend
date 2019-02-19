@@ -8,6 +8,22 @@ export class LocalDataService {
 
   constructor() { }
 
+  public setUserLocationsForWeekUpdateDate() {
+    localStorage.setItem('userLocationsForWeekUpdate', new Date().toString());
+  }
+
+  public getUserLocationsForWeekUpdateDate(): Date {
+    return new Date(Date.parse(localStorage.getItem('userLocationsForWeekUpdate')));
+  }
+
+  public setUserLocationsUpdateDate() {
+    localStorage.setItem('userLocationsUpdate', new Date().toString());
+  }
+
+  public getUserLocationsUpdateDate(): Date {
+    return new Date(Date.parse(localStorage.getItem('userLocationsUpdate')));
+  }
+
   public setLocationsForGroup(locations: Location[][]) {
     localStorage.setItem('locationsForGroup', JSON.stringify(locations));
   }
