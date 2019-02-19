@@ -1,12 +1,21 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LocalDataService } from './services/local-data.service';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthInterceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        if (localStorage.getItem('geostat-token')) {
+    constructor(private localDataService: LocalDataService) { }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let token = this.localDataService.getToken();
+
+        if (token) {
             const newRequest = req.clone({
-                headers: req.headers.append('GEOSTAT_AUTH', localStorage.getItem('geostat-token'))
+                headers: req.headers.append('GEOSTAT_AUTH', token)
             });
 
             return next.handle(newRequest);

@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { Response } from 'src/app/models/response';
 import { UserAuth } from 'src/app/models/userAuth';
 import { AletrtifyService } from './aletrtify.service';
+import { LocalDataService } from './local-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class AccountService {
     private http: HttpService,
     private logger: LoggerService,
     private alertifyService: AletrtifyService,
+    private localDataService: LocalDataService,
     private router: Router) { }
 
   public logIn(user: UserAuth) {
@@ -31,24 +33,22 @@ export class AccountService {
   }
 
   public getUserEmail() {
-    return localStorage.getItem('user-email');
+    return this.localDataService.getUserEmail();
   }
 
   public getUserId() {
-    return localStorage.getItem('user-id');
+    return this.localDataService.getUserId();
   }
 
   public setAuthData(data: Response) {
-    localStorage.setItem('geostat-token', data.Token);
-    localStorage.setItem('user-email', data.UserEmail);
-    localStorage.setItem('user-id', data.UserId);
+    this.localDataService.setToken( data.Token);
+    this.localDataService.setUserEmail(data.UserEmail);
+    this.localDataService.setUserId(data.UserId);
     this.router.navigate(['/']);
   }
 
   public removeAuthData() {
-    localStorage.removeItem('geostat-token');
-    localStorage.removeItem('user-email');
-    localStorage.removeItem('user-id');
+    this.localDataService.removeAllData();
     this.router.navigate(['/']);
   }
 
@@ -68,7 +68,7 @@ export class AccountService {
   }
 
   public isAuthorized() {
-    return !!localStorage.getItem('geostat-token');
+    return !!this.localDataService.getToken();
   }
 
   public redirectToLogin() {

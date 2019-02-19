@@ -5,6 +5,7 @@ import { AccountService } from 'src/common/services/account.service';
 import { MapType } from 'src/common/enums';
 import { UserService } from 'src/common/services/user.service';
 import { DateService } from 'src/common/services/date.service';
+import { LocalDataService } from 'src/common/services/local-data.service';
 
 @Component({
   selector: 'app-user-map',
@@ -19,13 +20,14 @@ export class UserMapComponent implements OnInit {
     private locationService: LocationService,
     private userService: UserService,
     private accountService: AccountService,
+    private localDataService: LocalDataService,
     private dateService: DateService) { }
 
   ngOnInit() {
     this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), this.accountService.getUserId())
       .subscribe(data => {
         this.userLocations = data;
-        localStorage.setItem('locations', JSON.stringify(data));
+        this.localDataService.setLocationsForUser(data);
       });
   }
 
@@ -33,7 +35,7 @@ export class UserMapComponent implements OnInit {
     this.locationService.getLocationsForUser(this.accountService.getUserId())
       .subscribe(data => {
         this.userLocations = data;
-        localStorage.setItem('locations', JSON.stringify(data));
+        this.localDataService.setLocationsForUser(data);
       });
   }
 

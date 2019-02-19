@@ -12,6 +12,7 @@ import { MapType } from 'src/common/enums';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
 import { DateService } from 'src/common/services/date.service';
+import { LocalDataService } from 'src/common/services/local-data.service';
 
 @Component({
   selector: 'app-group-users',
@@ -38,19 +39,13 @@ export class GroupUsersComponent implements OnInit {
     private locationService: LocationService,
     private loggerService: LoggerService,
     private accountService: AccountService,
+    private localDataService: LocalDataService,
     private dateService: DateService) { }
 
   public showMap(users: GeoStatUser[], groupName: string) {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
-    // localStorage.setItem('currentGroupUsers', JSON.stringify(users));
-
-    Promise.all(this.getLocationsForUsers(users))
-      .then(res => {
-        // localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
-      })
-
-
+    this.getLocationsForUsers(users);
     this.mode = false;
   }
 
@@ -62,7 +57,7 @@ export class GroupUsersComponent implements OnInit {
       promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
         .subscribe(locations => {
           this.usersLocationsForMap.push(locations);
-          localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
+          this.localDataService.setLocationsForGroup(this.usersLocationsForMap);
         }));
     });
 
@@ -75,7 +70,7 @@ export class GroupUsersComponent implements OnInit {
       this.locationService.getLocationsForUser(user.id)
         .subscribe((data: Location[]) => {
           this.usersLocationsForMap.push(data);
-          localStorage.setItem('locationsForGroup', JSON.stringify(this.usersLocationsForMap));
+          this.localDataService.setLocationsForGroup(this.usersLocationsForMap);
         })
     });
   }
