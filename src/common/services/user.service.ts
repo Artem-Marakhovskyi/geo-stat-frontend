@@ -11,7 +11,8 @@ import { GeoStatUser } from 'src/app/models/geoStatUser';
 })
 export class UserService {
 
-  constructor(private http: HttpService,
+  constructor(
+    private http: HttpService,
     private logger: LoggerService) { }
 
   public getUsers(): Observable<GeoStatUser[]> {
@@ -22,11 +23,11 @@ export class UserService {
     return this.http.get<GroupUser[]>(UrlContaner.getGroupUsersURL);
   }
 
-  public getUsersForGroup(groupId: String): Observable<GroupUser[]> {
+  public getUsersForGroup(groupId: string): Observable<GroupUser[]> {
     return this.http.get<GroupUser[]>(UrlContaner.getUsersForGroupURL(groupId));
   }
 
-  public getUserById(id: String) {
+  public getUserById(id: string) {
     return this.http.get<GeoStatUser>(UrlContaner.getUserByIdURL(id));
   }
 

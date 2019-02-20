@@ -1,19 +1,18 @@
 <div class="menu home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
     <a class="pure-menu-heading" routerLink="">GeoStat</a>
-    <ul class="pure-menu-list">
-        <!-- <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">About</a></li>
-        <li class="pure-menu-item"><a routerLink="#" class="pure-menu-link">Contact</a></li> -->
-        <li class="pure-menu-item"><a routerLink="/locations" class="pure-menu-link">Locations</a></li>
-        <li class="pure-menu-item"><a routerLink="/groups" class="pure-menu-link">Groups</a></li>
+    <ul class="pure-menu-list" *ngIf="this.isAuthorized === true">
         <li class="pure-menu-item"><a routerLink="/groupsUsers" class="pure-menu-link">Groups users</a></li>
-        <li class="pure-menu-item"><a routerLink="/map" class="pure-menu-link">Map</a></li>
+        <li class="pure-menu-item"><a routerLink="/userMap" class="pure-menu-link">User map</a></li>
+        <!-- <li class="pure-menu-item"><a routerLink="/groupMap" class="pure-menu-link">Group map</a></li> -->
     </ul>
-    <ul class="pure-menu-list right-bar">
+    <ul class="pure-menu-list right-bar" *ngIf="this.isAuthorized === true">
+        <li class="pure-menu-item"><a class="pure-menu-link">Hello, <a class="user">{{userName}}</a></a></li>
+        <li class="pure-menu-item"><a routerLink="/login" class="pure-menu-link" (click)="this.account.logOff()">Log Off</a></li>
+    </ul>
+    <ul class="pure-menu-list right-bar" *ngIf="this.isAuthorized === false">
         <li class="pure-menu-item"><a routerLink="/login" class="pure-menu-link">Log In</a></li>
         <li class="pure-menu-item"><a routerLink="/register" class="pure-menu-link">Sign Up</a></li>
     </ul>
 </div>
-
 <div class="menu-image"></div>
-
 <router-outlet></router-outlet>

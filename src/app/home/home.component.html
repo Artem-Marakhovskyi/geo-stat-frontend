@@ -1,0 +1,16 @@
+<div class="splash-container">
+  <div class="splash">
+    <h1 class="splash-head">GeoStat</h1>
+    <p class="splash-subhead">
+      Track your daily locations and watch the most visited places!
+    </p>
+    <p *ngIf="!isLogged">
+      <span id="login-btn"><a class="pure-button pure-button-primary" routerLink="/login">Log in</a></span>
+      <span><a class="pure-button pure-button-primary" routerLink="/register">Register</a></span>
+    </p>
+    <p *ngIf="isLogged">
+        <span id="login-btn"><a class="pure-button pure-button-primary" routerLink="/groupsUsers">My groups</a></span>
+        <span><a class="pure-button pure-button-primary" routerLink="/userMap">My map</a></span>
+      </p>
+  </div>
+</div>

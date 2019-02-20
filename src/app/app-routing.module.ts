@@ -1,22 +1,52 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { LocationsComponent } from './locations/locations.component';
-import { GroupsComponent } from './groups/groups.component';
 import { GroupUsersComponent } from './group-users/group-users.component';
-import { MapComponent } from './map/map.component';
+import { UserMapComponent } from './user-map/user-map.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { LoggedGuard } from 'src/common/guards/logged.guard';
+import { GroupCreatingComponent } from './group-creating/group-creating.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'register', component: RegistrationFormComponent },
-  { path: 'login', component: LoginFormComponent },
-  { path: 'locations', component: LocationsComponent },
-  { path: 'groups', component: GroupsComponent },
-  { path: 'groupsUsers', component: GroupUsersComponent },
-  { path: 'map', component: MapComponent },
-  { path: '**', redirectTo: '/' }
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'register',
+    component: RegistrationFormComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'login',
+    component: LoginFormComponent,
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: 'groupsUsers',
+    component: GroupUsersComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'userMap',
+    component: UserMapComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'groupCreating',
+    component: GroupCreatingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  }
 ];
 
 @NgModule({

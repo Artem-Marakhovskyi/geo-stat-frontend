@@ -1,3 +1,33 @@
+.group {
+    border: 2px solid;
+    border-color: #2d3e50;
+    background-color: whitesmoke;
+    color: #5797C1;
+}
+
+.group-container {
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.container-table {
+    border: 1px solid #2d3e50;
+}
+
+.container-thead {
+    background-color: #5797C1;
+    color: white;
+}
+
+hr {
+    color: #2d3e50;
+    size: 2;
+}
+
+table {
+    width: 100%;
+}
+
 .user-item {
     margin-top: 30px;
     margin-left: 30px;
@@ -9,4 +39,32 @@
     border-color: #c3e6cb;
     border: 1px solid;
     border-radius: .5rem;
+}
+
+.members-contaner {
+    text-align: center;
+}
+
+.button-success {
+    float: right;
+    top: 0;
+    color: white;
+    background: #5797C1;
+    border-color: #0175c1;
+    border: 1px solid;
+    border-radius: .5rem;
+}
+
+.button-success:hover {
+    background: #9ed4f7;
+}
+
+.back-button {
+    position: absolute;
+    top: 10%;
+    right: 1%;
+    width: 10%;
+    z-index: 999;
+    background-color: #0078e7;
+    color: #fff;
 }

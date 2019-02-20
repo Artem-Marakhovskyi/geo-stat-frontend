@@ -1,19 +1,37 @@
 agm-map {
-    height: 89vh;
-    width: 71vw;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    /* height: 100%;
+    width: 100%;
     box-shadow: 0 1px 2px 0 rgba(50, 50, 50, .4);
-    margin: 20px;
-    float: right;
+    margin: 30px 20px 18px 0; */
+    /* float: right; */
+}
+
+.map-wrapper {
+    position:relative;
+    height: 100%;
+    width: 100%;
+}
+
+.name-label {
+    color: #2d3e50;
 }
 
 .map-definiton {
     position: fixed;
     overflow: auto;
-    top: 5vh;
+    top: 8%;
     bottom: 0;
-    float: left;
+    /* float: left; */
     /* height: 85vh;  */
-    width: 20vw;
+    width: 25vw;
     padding: 15px 30px;
     margin: 20px;
     background-color: #fff;
@@ -21,6 +39,7 @@ agm-map {
 }
 
 .user {
+    font-size: small;
     padding-top: 10px;
     padding-bottom: 30px;
     background-color: #e6e6e6;

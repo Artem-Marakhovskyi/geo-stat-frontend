@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FilterInterval } from 'src/common/enums';
 
 @Injectable({
     providedIn: 'root'
@@ -7,7 +8,10 @@ export class MapConfiguration {
     public zoom: Number = 13;
     public kharkivLatitude: Number = 50.005698;
     public kharkivLongitude: Number = 36.229140;
-    public colors = ['FF0000',
+    public dateFilter = 'week';
+    public filterInterval = FilterInterval.Week;
+    public colors = [
+        'FF0000',
         '00FF00',
         '0000FF',
         'FFFF00',

@@ -1,5 +1,6 @@
 export class Group {
-    id: String;
-    label: String;
-    creatorId: String;
+    id: string;
+    label: string;
+    creatorId: string;
+    creatorName: string;
 }

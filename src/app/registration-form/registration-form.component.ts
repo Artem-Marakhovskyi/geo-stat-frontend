@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LoggerService } from 'src/common/services/logger.service';
 import { HttpService } from 'src/common/services/http.service';
 import { User } from '../models/user';
+import { AccountService } from 'src/common/services/account.service';
+import { Router } from '@angular/router';
+import { AletrtifyService } from 'src/common/services/aletrtify.service';
 
 
 @Component({
@@ -11,22 +14,24 @@ import { User } from '../models/user';
   providers: [LoggerService, HttpService]
 })
 export class RegistrationFormComponent implements OnInit {
-
-  constructor(private loggerService: LoggerService, private httpService: HttpService) {
-    this.loggerService.debug('Your log message goes here');
-  }
-
+  private passwordError;
   private user: User = new User();
 
-  public submit(user: User) {
+  constructor(
+    private loggerService: LoggerService,
+    private httpService: HttpService,
+    private accountService: AccountService,
+    private alertifyService: AletrtifyService,
+    private router: Router) { }
 
-    // if (user.password === user.passwordRepeat) {
-    //   this.httpService.postUser(user)
-    //     .subscribe(
-    //       response => { },
-    //       error => this.loggerService.error(error)
-    //     );
-    // }
+  public submit(user: User) {
+    if (user.password === user.repeatPassword) {
+      this.accountService.signUp(user);
+    } else {
+      this.user.password = '';
+      this.user.repeatPassword = '';
+      this.alertifyService.error('Passwords are not equal!');
+    }
   }
 
   ngOnInit() { }

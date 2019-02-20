@@ -22,4 +22,8 @@ export class GroupService {
     return this.http.get<Group[]>(UrlContaner.getGroupByIdURL(id));
   }
 
+  public getGroupsForUser(id: string): Observable<Group[]> {
+    return this.http.get<Group[]>(UrlContaner.getGroupForUserURL(id));
+  }
+
 }
