@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="group group-container" *ngFor="let gu of groupsWithUsers">
-      <button class="pure-button button-success" (click)="showMap(gu.users, gu.label)">Watch map</button>
+      <button class="pure-button button-success" (click)="showMap(gu.users, gu.label, gu.id)">Watch map</button>
       <p><b>Label:</b> {{gu.label}}</p>
       <p><b>Creator Name:</b> {{gu.creatorName}}</p>
       <hr size="2" style="color: #2d3e50;">
@@ -38,6 +38,6 @@
 </div>
 <div *ngIf="mode === false">
   <app-map (onFilterChange)="onFilterChange($event)" [usersLocations]="usersLocationsForMap" [users]="usersForMap"
-    [groupName]="groupNameForMap" [type]="type">
+    [groupName]="groupNameForMap" [type]="type" [groupId]="groupIdForMap">
   </app-map>
 </div>

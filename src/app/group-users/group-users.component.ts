@@ -8,11 +8,12 @@ import { forkJoin, Observable } from 'rxjs';
 import { GroupService } from 'src/common/services/group.service';
 import { UserService } from 'src/common/services/user.service';
 import { AccountService } from 'src/common/services/account.service';
-import { MapType } from 'src/common/enums';
+import { MapType, FilterInterval } from 'src/common/enums';
 import { LocationService } from 'src/common/services/location.service';
 import { Location } from '../models/location';
 import { DateService } from 'src/common/services/date.service';
 import { LocalDataService } from 'src/common/services/local-data.service';
+import { DataProviderService } from 'src/common/services/data-provider.service';
 
 @Component({
   selector: 'app-group-users',
@@ -28,9 +29,9 @@ export class GroupUsersComponent implements OnInit {
   private usersForMap: GeoStatUser[];
   private usersLocationsForMap = new Array<Location[]>(0);
   private groupNameForMap: string;
+  private groupIdForMap: string;
   private mode = true;
   private index = 0;
-  // private promises = new Array();
 
 
   constructor(
@@ -40,39 +41,47 @@ export class GroupUsersComponent implements OnInit {
     private loggerService: LoggerService,
     private accountService: AccountService,
     private localDataService: LocalDataService,
+    private dataproviderService: DataProviderService,
     private dateService: DateService) { }
 
-  public showMap(users: GeoStatUser[], groupName: string) {
+  public showMap(users: GeoStatUser[], groupName: string, groupId: string) {
     this.usersForMap = users;
     this.groupNameForMap = groupName;
-    this.getLocationsForUsers(users);
+    this.groupIdForMap = groupId;
+    this.getLocationsForUsers(users, groupId, FilterInterval.Week);
     this.mode = false;
   }
 
-  getLocationsForUsers(users: GeoStatUser[]) {
-    let promises = new Array();
+  getLocationsForUsers(users: GeoStatUser[], groupId: string, interval: FilterInterval) {
     this.usersLocationsForMap = new Array<Location[]>(0);
+    this.dataproviderService.getLocationsForGroup(users, groupId, interval)
+      .then(result => {
+        this.usersLocationsForMap = result;
+      })
 
-    users.forEach(user => {
-      promises.push(this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
-        .subscribe(locations => {
-          this.usersLocationsForMap.push(locations);
-          this.localDataService.setLocationsForGroup(this.usersLocationsForMap);
-        }));
-    });
-
-    return promises;
+    // users.forEach(user => {
+    //   this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
+    //     .subscribe(locations => {
+    //       this.usersLocationsForMap.push(locations);
+    //       this.localDataService.setLocationsForGroup(this.groupNameForMap, this.usersLocationsForMap);
+    //     });
+    // });
   }
 
-  private onFilterChange(increased: any) {
+  private onFilterChange(increased: FilterInterval) {
     this.usersLocationsForMap = this.usersLocationsForMap.slice(0, 0);
-    this.usersForMap.forEach(user => {
-      this.locationService.getLocationsForUser(user.id)
-        .subscribe((data: Location[]) => {
-          this.usersLocationsForMap.push(data);
-          this.localDataService.setLocationsForGroup(this.usersLocationsForMap);
-        })
-    });
+
+    this.dataproviderService.getLocationsForGroup(this.usersForMap, this.groupIdForMap, increased)
+      .then(result => {
+        this.usersLocationsForMap = result;
+      })
+    // this.usersForMap.forEach(user => {
+    //   this.locationService.getLocationsForUser(user.id)
+    //     .subscribe((data: Location[]) => {
+    //       this.usersLocationsForMap.push(data);
+    //       this.localDataService.setLocationsForGroup(this.groupNameForMap, this.usersLocationsForMap);
+    //     })
+    // });
   }
 
   public backToGroups() {

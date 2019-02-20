@@ -34,6 +34,10 @@ export class LocationsFilterService {
   }
 
   public fillterByPeriodForGroup(locations: Location[][], period: FilterInterval): Location[][] {
+    if(!locations){
+      return locations;
+    }
+    
     let currentDate = new Date();
     let filterDate: number;
     let resultLocations: Location[][] = new Array<Location[]>(0);

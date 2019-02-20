@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Location } from 'src/app/models/location';
+import { FilterInterval } from '../enums';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,39 @@ export class LocalDataService {
     return new Date(Date.parse(localStorage.getItem('userLocationsUpdate')));
   }
 
-  public setLocationsForGroup(locations: Location[][]) {
-    localStorage.setItem('locationsForGroup', JSON.stringify(locations));
+  public setLocationsForGroup(groupId: string, locations: Location[][]) {
+    localStorage.setItem('locationsForGroup' + groupId, JSON.stringify(locations));
   }
 
-  public getLocationsForGroup(): Location[][] {
-    return JSON.parse(localStorage.getItem('locationsForGroup'));
+  public getLocationsForGroup(groupId: string): Location[][] {
+    return JSON.parse(localStorage.getItem('locationsForGroup' + groupId));
+  }
+
+  public setLocationsLastUpdateForGroup(groupId: string) {
+    localStorage.setItem('locationsLastUpdateForGroup' + groupId, new Date().toString());
+  }
+
+  public getLocationsLastUpdateForGroup(groupId: string): Date {
+    return new Date(Date.parse(localStorage.getItem('locationsLastUpdateForGroup' + groupId)));
+  }
+
+  public setLocationsLoadIntervalForGroup(groupId: string, interval: FilterInterval) {
+    localStorage.setItem('locationsIntervalForGroup' + groupId, interval.toString());
+  }
+
+  public getLocationsLoadIntervalForGroup(groupId: string): FilterInterval {
+    switch (Number.parseInt(localStorage.getItem('locationsIntervalForGroup' + groupId))) {
+      case 1:
+        return FilterInterval.Day;
+      case 2:
+        return FilterInterval.Week;
+      case 3:
+        return FilterInterval.Month;
+      case 4:
+        return FilterInterval.AllTime;
+      default:
+        return FilterInterval.None;
+    }
   }
 
   public setLocationsForUser(locations: Location[]) {

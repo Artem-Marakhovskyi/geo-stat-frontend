@@ -20,8 +20,9 @@ export class MapComponent implements OnInit {
   @Input() private userLocations: Array<Location>;
   @Input() private users: GeoStatUser[];
   @Input() private groupName: string;
+  @Input() private groupId: string;
   @Input() private type: MapType;
-  @Output() private onFilterChange = new EventEmitter<boolean>();
+  @Output() private onFilterChange = new EventEmitter<FilterInterval>();
   private readonly groupType = MapType.Group;
   private currentFilterPeriod = this.mapConfiguration.filterInterval;
   private loadedFilterPeriod = this.mapConfiguration.filterInterval;
@@ -42,7 +43,7 @@ export class MapComponent implements OnInit {
     }
   }
 
-  private getAllLocations(increased: any) {
+  private getAllLocations(increased: FilterInterval) {
     this.onFilterChange.emit(increased);
   }
 
@@ -52,13 +53,13 @@ export class MapComponent implements OnInit {
     if (this.type === MapType.Personal) {
       let lastUpdate = this.localDataService.getUserLocationsUpdateDate();
       if (!this.dateService.isDateTimeValid(lastUpdate)) {
-        this.getAllLocations(true);
+        this.getAllLocations(this.currentFilterPeriod);
       }
 
       this.userLocations = this.localDataService.getLocationsForUser();
 
       if (this.currentFilterPeriod > this.loadedFilterPeriod) {
-        this.getAllLocations(true);
+        this.getAllLocations(this.currentFilterPeriod);
         this.currentFilterPeriod = FilterInterval.AllTime;
         this.loadedFilterPeriod = FilterInterval.AllTime;
       }
@@ -79,29 +80,9 @@ export class MapComponent implements OnInit {
     }
 
     if (this.type === MapType.Group) {
-      this.usersLocations = this.localDataService.getLocationsForGroup();
-
-      if (this.currentFilterPeriod > this.loadedFilterPeriod) {
-        this.getAllLocations(true);
-        this.currentFilterPeriod = FilterInterval.AllTime;
-        this.loadedFilterPeriod = FilterInterval.AllTime;
-      }
-
-      switch (this.dateFilter) {
-        case 'day':
-          this.usersLocations = this.filterService.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Day);
-          break;
-        case 'week':
-          this.usersLocations = this.filterService.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Week);
-          break;
-        case 'month':
-          this.usersLocations = this.filterService.fillterByPeriodForGroup(this.usersLocations, FilterInterval.Month);
-          break;
-        default:
-          break;
-      }
+      this.usersLocations = this.localDataService.getLocationsForGroup(this.groupId);
+      this.getAllLocations(this.currentFilterPeriod);
     }
   }
-
 
 }

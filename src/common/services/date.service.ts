@@ -5,7 +5,7 @@ import { FilterInterval } from '../enums';
   providedIn: 'root'
 })
 export class DateService {
-  private readonly timeIntervalForDataStoring = 1;
+  private readonly timeIntervalForDataStoring = 5;
 
   constructor() { }
 

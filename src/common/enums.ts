@@ -7,5 +7,6 @@ export enum FilterInterval {
   Day= 1,
   Week,
   Month,
-  AllTime
+  AllTime,
+  None
 }
