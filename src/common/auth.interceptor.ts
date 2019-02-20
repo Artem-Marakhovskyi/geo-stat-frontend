@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private localDataService: LocalDataService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let token = this.localDataService.getToken();
+        const token = this.localDataService.getToken();
 
         if (token) {
             const newRequest = req.clone({

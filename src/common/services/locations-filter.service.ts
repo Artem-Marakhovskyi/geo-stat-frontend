@@ -11,7 +11,7 @@ export class LocationsFilterService {
   constructor(private dateService: DateService) { }
 
   public fillterByPeriodForUser(locations: Location[], period: FilterInterval): Location[] {
-    let currentDate = new Date();
+    const currentDate = new Date();
     let filterDate: number;
 
     switch (period) {
@@ -34,13 +34,13 @@ export class LocationsFilterService {
   }
 
   public fillterByPeriodForGroup(locations: Location[][], period: FilterInterval): Location[][] {
-    if(!locations){
+    if (!locations) {
       return locations;
     }
-    
-    let currentDate = new Date();
+
+    const currentDate = new Date();
     let filterDate: number;
-    let resultLocations: Location[][] = new Array<Location[]>(0);
+    const resultLocations: Location[][] = new Array<Location[]>(0);
 
     switch (period) {
       case FilterInterval.Day:
@@ -59,7 +59,7 @@ export class LocationsFilterService {
     locations.forEach(element => {
       resultLocations.push(element.filter((location: Location) =>
         new Date(location.dateTime).valueOf() > filterDate.valueOf()
-      ))
+      ));
     });
 
     return resultLocations;

@@ -9,14 +9,6 @@ export class LocalDataService {
 
   constructor() { }
 
-  public setUserLocationsForWeekUpdateDate() {
-    localStorage.setItem('userLocationsForWeekUpdate', new Date().toString());
-  }
-
-  public getUserLocationsForWeekUpdateDate(): Date {
-    return new Date(Date.parse(localStorage.getItem('userLocationsForWeekUpdate')));
-  }
-
   public setUserLocationsUpdateDate() {
     localStorage.setItem('userLocationsUpdate', new Date().toString());
   }
@@ -46,18 +38,15 @@ export class LocalDataService {
   }
 
   public getLocationsLoadIntervalForGroup(groupId: string): FilterInterval {
-    switch (Number.parseInt(localStorage.getItem('locationsIntervalForGroup' + groupId))) {
-      case 1:
-        return FilterInterval.Day;
-      case 2:
-        return FilterInterval.Week;
-      case 3:
-        return FilterInterval.Month;
-      case 4:
-        return FilterInterval.AllTime;
-      default:
-        return FilterInterval.None;
-    }
+    return this.defineFilterInterval(Number.parseInt(localStorage.getItem('locationsIntervalForGroup' + groupId), 10));
+  }
+
+  public setLocationsLoadIntervalForUser(interval: FilterInterval) {
+    localStorage.setItem('locationsIntervalForUser', interval.toString());
+  }
+
+  public getLocationsLoadIntervalForUser(): FilterInterval {
+    return this.defineFilterInterval(Number.parseInt(localStorage.getItem('locationsIntervalForUser'), 10));
   }
 
   public setLocationsForUser(locations: Location[]) {
@@ -93,11 +82,22 @@ export class LocalDataService {
   }
 
   public removeAllData() {
-    localStorage.removeItem('locations')
-    localStorage.removeItem('locationsForGroup')
-    localStorage.removeItem('geostat-token');
-    localStorage.removeItem('user-email');
-    localStorage.removeItem('user-id');
+    localStorage.clear();
+  }
+
+  private defineFilterInterval(value: number): FilterInterval {
+    switch (value) {
+      case 1:
+        return FilterInterval.Day;
+      case 2:
+        return FilterInterval.Week;
+      case 3:
+        return FilterInterval.Month;
+      case 4:
+        return FilterInterval.AllTime;
+      default:
+        return FilterInterval.None;
+    }
   }
 
 }

@@ -25,7 +25,6 @@ export class MapComponent implements OnInit {
   @Output() private onFilterChange = new EventEmitter<FilterInterval>();
   private readonly groupType = MapType.Group;
   private currentFilterPeriod = this.mapConfiguration.filterInterval;
-  private loadedFilterPeriod = this.mapConfiguration.filterInterval;
   private dateFilter = this.mapConfiguration.dateFilter;
 
   constructor(
@@ -51,32 +50,7 @@ export class MapComponent implements OnInit {
     this.currentFilterPeriod = this.dateService.setFilterPeriod(this.dateFilter);
 
     if (this.type === MapType.Personal) {
-      let lastUpdate = this.localDataService.getUserLocationsUpdateDate();
-      if (!this.dateService.isDateTimeValid(lastUpdate)) {
-        this.getAllLocations(this.currentFilterPeriod);
-      }
-
-      this.userLocations = this.localDataService.getLocationsForUser();
-
-      if (this.currentFilterPeriod > this.loadedFilterPeriod) {
-        this.getAllLocations(this.currentFilterPeriod);
-        this.currentFilterPeriod = FilterInterval.AllTime;
-        this.loadedFilterPeriod = FilterInterval.AllTime;
-      }
-
-      switch (this.dateFilter) {
-        case 'day':
-          this.userLocations = this.filterService.fillterByPeriodForUser(this.userLocations, FilterInterval.Day);
-          break;
-        case 'week':
-          this.userLocations = this.filterService.fillterByPeriodForUser(this.userLocations, FilterInterval.Week);
-          break;
-        case 'month':
-          this.userLocations = this.filterService.fillterByPeriodForUser(this.userLocations, FilterInterval.Month);
-          break;
-        default:
-          break;
-      }
+      this.getAllLocations(this.currentFilterPeriod);
     }
 
     if (this.type === MapType.Group) {

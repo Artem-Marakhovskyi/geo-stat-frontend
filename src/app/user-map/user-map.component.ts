@@ -30,15 +30,10 @@ export class UserMapComponent implements OnInit {
       .then(locations => {
         this.userLocations = locations;
       });
-    // this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), this.accountService.getUserId())
-    //   .subscribe(data => {
-    //     this.userLocations = data;
-    //     this.localDataService.setLocationsForUser(data);
-    //   });
   }
 
-  private onFilterChange(increased: any) {
-    this.dataProvider.getLocationsForUser()
+  private onFilterChange(increased: FilterInterval) {
+    this.dataProvider.getLocationsForUserFromDate(increased)
       .then(locations => {
         this.userLocations = locations;
       });

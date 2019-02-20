@@ -37,12 +37,7 @@ export class GroupUsersComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private userService: UserService,
-    private locationService: LocationService,
-    private loggerService: LoggerService,
-    private accountService: AccountService,
-    private localDataService: LocalDataService,
-    private dataproviderService: DataProviderService,
-    private dateService: DateService) { }
+    private dataproviderService: DataProviderService) { }
 
   public showMap(users: GeoStatUser[], groupName: string, groupId: string) {
     this.usersForMap = users;
@@ -57,15 +52,7 @@ export class GroupUsersComponent implements OnInit {
     this.dataproviderService.getLocationsForGroup(users, groupId, interval)
       .then(result => {
         this.usersLocationsForMap = result;
-      })
-
-    // users.forEach(user => {
-    //   this.locationService.getLocationsForUserFromDate(this.dateService.getDateOneWeekBefore(), user.id)
-    //     .subscribe(locations => {
-    //       this.usersLocationsForMap.push(locations);
-    //       this.localDataService.setLocationsForGroup(this.groupNameForMap, this.usersLocationsForMap);
-    //     });
-    // });
+      });
   }
 
   private onFilterChange(increased: FilterInterval) {
@@ -74,14 +61,7 @@ export class GroupUsersComponent implements OnInit {
     this.dataproviderService.getLocationsForGroup(this.usersForMap, this.groupIdForMap, increased)
       .then(result => {
         this.usersLocationsForMap = result;
-      })
-    // this.usersForMap.forEach(user => {
-    //   this.locationService.getLocationsForUser(user.id)
-    //     .subscribe((data: Location[]) => {
-    //       this.usersLocationsForMap.push(data);
-    //       this.localDataService.setLocationsForGroup(this.groupNameForMap, this.usersLocationsForMap);
-    //     })
-    // });
+      });
   }
 
   public backToGroups() {

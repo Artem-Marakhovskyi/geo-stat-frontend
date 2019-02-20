@@ -14,25 +14,25 @@ export class DateService {
   }
 
   public getDateOneDayBefore() {
-    let date = new Date();
+    const date = new Date();
 
     return new Date(date.setDate(date.getDate() - 1));
   }
 
   public getDateOneWeekBefore() {
-    let date = new Date();
+    const date = new Date();
 
     return new Date(date.setDate(date.getDate() - 7));
   }
 
   public getDateOneMonthBefore() {
-    let date = new Date();
+    const date = new Date();
 
     return new Date(date.setMonth(date.getMonth() - 1));
   }
 
   public getDateBeforeInterval(interval: FilterInterval) {
-    let date = new Date();
+    const date = new Date();
 
     switch (interval) {
       case FilterInterval.Day:
